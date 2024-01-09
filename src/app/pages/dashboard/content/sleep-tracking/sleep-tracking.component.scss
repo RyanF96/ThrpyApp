@@ -1,0 +1,71 @@
+.container {
+    /* Some container-specific styles here */
+    font-family: "poppins";
+    padding: 0 10px 0 10px;
+    position: relative;
+    height: 100vh;
+
+ .header {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+ .arrow-left {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    font-size: 24px;
+    font-weight: 200;
+}
+
+ hr {
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+ .sleep-time {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+ .timer {
+    position: absolute;
+    top: 180px;
+    left: 0;
+}
+
+ ion-button::part(native) {
+    border-radius: 12px;
+    background-color: #B8926A;
+}
+
+ ion-button {
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+ .sleep-button-row {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+ .times {
+    font-size: 20px;
+}
+
+ .save {
+    bottom: 10px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+}
+
+ .save-inner-container {
+    margin: 0 10px;
+}
+}

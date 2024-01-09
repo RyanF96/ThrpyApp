@@ -1,0 +1,99 @@
+/* Styles for the container class */
+.container {
+    /* Some container-specific styles here */
+    font-family: "poppins";
+    padding: 0 10px 0 10px;
+    position: relative;
+
+
+    /* Styles for ion-content inside .container */
+    ion-content {
+        --background: white;
+    }
+
+    .arrow-left {
+        position: absolute;
+        top: 0;
+        left: 5px;
+        font-size: 24px;
+        font-weight: 200;
+    }
+
+    .flex-center {
+        justify-content: center;
+        display: flex;
+        width: 100%;
+    }
+
+    .flex-left {
+        justify-content: start;
+        display: flex;
+        width: 100%;
+    }
+
+    ion-list {
+        width: 100%;
+    }
+
+    ion-input {
+        border: 1px solid #B8926A;
+        border-radius: 24px;
+        padding: 0 10px !important;
+        margin: 10px 20px 10px 20px;
+    }
+
+    ion-button::part(native) {
+        border-radius: 12px;
+        background-color: #d4cbbe;
+    }
+
+    .selected {
+        ion-button::part(native) {
+            border-radius: 12px;
+            background-color: #A4a998;
+        }
+
+    }
+
+    ion-button {
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+
+    .sub-heading {
+        display: flex;
+        justify-content: start;
+        width: 100%;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .edit-account {
+        width: 100%;
+    }
+
+    /* Styles for hr inside .container */
+    hr {
+        border-top: 1px solid #333;
+        margin: 20px 0;
+    }
+
+    .logout {
+        width: 100%;
+    }
+
+    /* Styles for div inside .container */
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Styles for .header inside .container */
+    .header {
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+    }
+}

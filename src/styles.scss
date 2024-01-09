@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.scss */
+/* Add the Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
+
+/* Other global styles and customizations can go below */
+
+.add-child-modal {
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+
+    &::part(content) {
+        width: 100px;
+        height: 300px;
+        border-radius: 10px;
+        background-color: aqua;
+    }
+}

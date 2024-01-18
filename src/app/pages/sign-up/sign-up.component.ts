@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AsyncValidatorFn, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, debounceTime, map, of, switchMap } from 'rxjs';
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { map } from 'rxjs';
 import { IUserIn } from 'src/app/data/contracts';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
@@ -60,6 +61,23 @@ export class SignUpComponent {
       }
     });
     this.registerForm.markAllAsTouched();
+  }
+
+  createFirebaseUser() {
+    const auth = getAuth();
+    let user = this.registerForm.value as IUserIn;
+    createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then((userCredential) => {
+        // Signed up 
+        debugger;
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   }
 
   checkPassword(): boolean {

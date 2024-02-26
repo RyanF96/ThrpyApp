@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommonService } from 'src/app/services/common.service';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -11,15 +12,15 @@ import { SettingsService } from 'src/app/services/settings.service';
 export class DashboardComponent {
   itemList: any[] = [];
 
-  constructor(private authService: AuthService, private router: Router, private settingsService: SettingsService) { }
+  constructor(private router: Router, private settingsService: SettingsService, private commonService: CommonService) { }
 
   ngOnInit(): void {
     this.itemList.push(
       { name: 'Sleep', icon: 'bed-outline', url: '/sleep' },
-      { name: 'Feeding', icon: 'feeding-bottle', url: 'sleep' },
-      { name: 'Solids', icon: 'utensils', url: 'sleep' },
-      { name: 'Diaper', icon: 'diaper', url: 'sleep' },
-      { name: 'Potty', icon: 'potty', url: 'sleep' },
+      { name: 'Feeding', icon: 'beer-outline', url: '/food' },
+      { name: 'Solids', icon: 'pizza-outline', url: '/solids' },
+      { name: 'Diaper', icon: 'sad-outline', url: 'sleep' },
+      { name: 'Potty', icon: 'ear-outline', url: 'sleep' },
       { name: 'Pumping', icon: 'breast-pump', url: 'sleep' },
       { name: 'Medicine', icon: 'medical-kit', url: 'sleep' },
       { name: 'Growth', icon: 'growth-chart', url: 'sleep' },
@@ -27,11 +28,17 @@ export class DashboardComponent {
       { name: 'Activity', icon: 'playground', url: 'sleep' }
     );
     this.getSettings();
+    this.getSleepDetailOptions();
   }
 
   getSettings() {
-    this.settingsService.getSettings().subscribe((res) => { 
+    this.settingsService.getSettings().subscribe((res) => {
     });
+  }
+
+  getSleepDetailOptions() {
+    this.commonService.getSleepDetailOptions().subscribe((res) => {
+    })
   }
 
   navigateToSettings() {

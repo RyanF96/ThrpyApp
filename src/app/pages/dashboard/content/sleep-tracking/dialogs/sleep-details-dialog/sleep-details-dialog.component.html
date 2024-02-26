@@ -1,1 +1,33 @@
-<p>sleep-details-dialog works!</p>
+<div class="container">
+    <form [formGroup]="detailsForm">
+        <ion-row class="center-row">
+            <ion-icon (click)="closeModal()" class="close" name="close"></ion-icon>
+            <span class="heading1">Details</span>
+            <ion-icon (click)="save()" class="accept" name="checkmark-outline"></ion-icon>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-select label="Start of sleep" [multiple]="true" formControlName="sleepStartIds">
+                    <ion-select-option *ngFor="let sleepDetail of startSleepDetails"
+                        [value]="sleepDetail.id">{{sleepDetail.description}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-select label="How it happened" [multiple]="true" formControlName="howItHappenedIds">
+                    <ion-select-option *ngFor="let how of howItHappened"
+                        [value]="how.id">{{how.description}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <ion-select label="End of sleep" [multiple]="true" formControlName="endOfSleepIds">
+                    <ion-select-option *ngFor="let end of endOfSleep"
+                        [value]="end.id">{{end.description}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-row>
+    </form>
+</div>

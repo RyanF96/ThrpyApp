@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { AsyncValidatorFn, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { map } from 'rxjs';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Subject, takeUntil } from 'rxjs';
 import { IUserIn } from 'src/app/data/contracts';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
@@ -12,14 +13,15 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
   registerForm!: FormGroup;
   username!: FormControl;
   email!: FormControl;
   password!: FormControl;
   confirmPassword!: FormControl;
+  componentDestroyed$ = new Subject();
 
-  constructor(private dataService: DataService, private router: Router, private authService: AuthService) { }
+  constructor(private dataService: DataService, private router: Router, private authService: AuthService, private auth: Auth) { }
 
   ngOnInit() {
     this.createFormControls();
@@ -34,7 +36,6 @@ export class SignUpComponent {
       this.confirmPassword = new FormControl(null, Validators.required),
       this.email = new FormControl(null, {
         validators: [Validators.required, Validators.email],
-        asyncValidators: [this.emailExistsValidator()],
         updateOn: 'change',
       });
   }
@@ -48,54 +49,45 @@ export class SignUpComponent {
     });
   }
 
-  submit() {
+  createFirebaseUser() {
     if (this.registerForm.valid !== true) {
       return;
     }
-    let user = this.registerForm.value as IUserIn;
-    this.dataService.register(user).subscribe((registered) => {
-      if (registered) {
-        this.authService.login(user.username, user.password);
-      } else {
-
-      }
-    });
-    this.registerForm.markAllAsTouched();
-  }
-
-  createFirebaseUser() {
-    const auth = getAuth();
-    let user = this.registerForm.value as IUserIn;
-    createUserWithEmailAndPassword(auth, user.email, user.password)
+    let userForm = this.registerForm.value as IUserIn;
+    createUserWithEmailAndPassword(this.auth, userForm.email, userForm.password)
       .then((userCredential) => {
-        // Signed up 
-        debugger;
         const user = userCredential.user;
-        // ...
+        user.getIdToken()
+          .then((accessToken) => {
+            localStorage.setItem('accessToken', accessToken);
+          })
+          .catch((error) => {
+            console.error('Error getting access token:', error);
+          });
+        const myUser = {
+          email: user.email,
+          username: userForm.username,
+          firebaseId: user.uid,
+          password: userForm.password
+        } as IUserIn
+        this.dataService.register(myUser).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
+          if (res) {
+            this.router.navigateByUrl('/login');
+          }
+        });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        console.error('Registration error:', error.code + ':' + error.message);
       });
+    this.registerForm.markAllAsTouched();
   }
 
   checkPassword(): boolean {
     return this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value;
   }
 
-  private emailExistsValidator(): AsyncValidatorFn {
-    return (control) => {
-      const email = control.value;
-
-      if (!email) {
-        return Promise.resolve(null); // No need to check if the field is empty
-      }
-
-      return this.dataService.checkEmailExists(email).pipe(
-        map(exists => (exists ? { emailExists: true } : null))
-      );
-    };
+  ngOnDestroy() {
+    this.componentDestroyed$.next(true);
+    this.componentDestroyed$.complete();
   }
-
 }

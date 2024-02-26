@@ -3,7 +3,7 @@
         <div class="header">
             <ion-icon routerLink="/dashboard" class="arrow-left" name="chevron-back-outline"></ion-icon>
             <div>
-                Add sleep
+                Add Sleep
             </div>
         </div>
         <hr>
@@ -22,14 +22,10 @@
                 </ion-button>
                 <ion-popover trigger="startDate" size="cover">
                     <ng-template>
-                        <ion-datetime [(ngModel)]="startDate"
-                        displayFormat="MMM DD, YYYY HH:mm"
-                        pickerFormat="MMM DD, YYYY HH:mm"
-                        presentation="time"
-                        locale="sl-SI"
-                        ></ion-datetime>
+                        <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm"
+                            pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
                     </ng-template>
-                  </ion-popover>
+                </ion-popover>
             </ion-row>
             <ion-row class="sleep-time">
                 <ion-button id="endDate">
@@ -45,15 +41,11 @@
                 </ion-button>
                 <ion-popover trigger="endDate" size="cover">
                     <ng-template>
-                      <ion-datetime [(ngModel)]="endDate"
-                      displayFormat="MMM DD, YYYY HH:mm"
-                      pickerFormat="MMM DD, YYYY HH:mm"
-                      presentation="time"
-                      locale="sl-SI"
-                      (ngModelChange)="manualTimeEntry()"
-                      ></ion-datetime>
+                        <ion-datetime [(ngModel)]="endDate" displayFormat="MMM DD, YYYY HH:mm"
+                            pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"
+                            (ngModelChange)="manualTimeEntry()"></ion-datetime>
                     </ng-template>
-                  </ion-popover>
+                </ion-popover>
             </ion-row>
             <ion-row class="timer sleep-time" *ngIf="seconds || minutes || hours">
                 <div class="times">
@@ -61,23 +53,23 @@
                 </div>
             </ion-row>
             <ion-row class="sleep-button-row">
-                <app-circular-button (buttonClicked)="checkTimer($event)"
-                    [stateChange]="state"></app-circular-button>
+                <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
             </ion-row>
             <ion-row *ngIf="state === 2">
                 <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
-                <ion-col class="sleep-time">Details</ion-col>
+                <ion-col class="sleep-time" (click)="addDetails()">Details</ion-col>
             </ion-row>
         </div>
-        <div *ngIf="state === 2" class="save">
-            <div class="save-inner-container">
-                <ion-row class="sleep-time">
-                    <ion-button (click)="saveSleep()">
-                        Save
-                    </ion-button>
-                </ion-row>
+        <ng-container *ngIf="state === 2">
+            <div class="save">
+                <div class="save-inner-container">
+                    <ion-row class="sleep-time">
+                        <ion-button (click)="saveSleep()">
+                            Save
+                        </ion-button>
+                    </ion-row>
+                </div>
             </div>
-        </div>
-
+        </ng-container>
     </div>
 </ion-content>

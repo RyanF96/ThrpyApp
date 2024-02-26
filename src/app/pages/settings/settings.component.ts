@@ -18,8 +18,12 @@ export class SettingsComponent implements OnInit {
   constructor(private authService: AuthService, private dataService: DataService, private modalController: ModalController, private settingsService: SettingsService) { }
 
   get selectedChildId(): string | undefined {
-    const selectedChildSetting = this.settingsService.settings.find(x => x.key === SettingsEnum.SelectedChild);
-    return selectedChildSetting ? selectedChildSetting.value : undefined;
+    const settings = localStorage.getItem('settings');
+    if (settings) {
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      return childId;
+    }
+    return;
   }
 
   ngOnInit() {

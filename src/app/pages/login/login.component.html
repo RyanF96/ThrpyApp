@@ -14,10 +14,9 @@
         </div>
         <form [formGroup]="loginForm">
             <div>
-
                 <ion-row class="input-row">
-                    <ion-input placeholder="Email Address" formControlName="userName"></ion-input>
-                    <div class="alert" *ngIf="userName.hasError('email') && (userName.dirty || userName.touched)">
+                    <ion-input placeholder="Email Address" formControlName="email"></ion-input>
+                    <div class="alert" *ngIf="email.hasError('email') && (email.dirty || email.touched)">
                         Please enter a valid email address.
                     </div>
                 </ion-row>
@@ -35,7 +34,7 @@
                     </div>
                 </ion-row>
                 <ion-row class="button-row">
-                    <ion-button class="button" (click)="submit()">
+                    <ion-button class="button" (click)="SignIn()">
                         Sign in
                     </ion-button>
                 </ion-row>

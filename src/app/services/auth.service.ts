@@ -1,39 +1,52 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { map } from 'rxjs';
+import { IUserIn } from '../data/contracts';
 import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnDestroy {
+export class AuthService {
+  userLoggedIn: boolean = false;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  get isUserLoggedIn() {
+    return this.userLoggedIn;
+  }
 
-  isUserLoggedIn: boolean = false;
-  setContext$ = new Subject();
+  set setUserStatus(loggedIn: boolean) {
+    this.userLoggedIn = loggedIn;
+  }
 
-  login(userName: string, password: string) {
-    this.dataService.login(userName, password).subscribe((userId) => {
-      if (userId !== null || !userId) {
-        this.isUserLoggedIn = true;
-        localStorage.setItem('userId', userId);
-        this.setContext$.next(userId);
-        this.router.navigateByUrl('/dashboard');
+  constructor(private dataService: DataService, private router: Router, private auth: Auth) { }
+
+  register(user: IUserIn) {
+    this.dataService.register(user).pipe(map((userId) => {
+      if (userId) {
+        this.setUserContext(userId);
       }
-    })
+    }));
+  }
+
+  login(firebaseId: string) {
+    return this.dataService.login(firebaseId).pipe(map((userId) => {
+      if (userId) {
+        this.setUserContext(userId);
+      }
+    }))
+  }
+
+  setUserContext(userId: string) {
+    this.setUserStatus = true;
+    localStorage.setItem('userId', userId);
+    this.router.navigateByUrl('/dashboard');
   }
 
   logout(): void {
-    this.isUserLoggedIn = false;
+    this.setUserStatus = false;
     localStorage.removeItem('userId');
-    this.setContext$.next(null);
+    localStorage.removeItem('accessToken');
     this.router.navigate(['/login']);
   }
-
-  ngOnDestroy() {
-    this.setContext$.complete();
-    this.setContext$.unsubscribe();
-  }
-
 }

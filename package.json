@@ -1,4 +1,5 @@
 {
+  "homepage": "https://RyanF96.github.io/ThrpyApp",
   "name": "thrpy-app",
   "version": "0.0.0",
   "scripts": {
@@ -6,7 +7,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +34,7 @@
     "@angular/compiler-cli": "^16.1.0",
     "@ionic/angular-toolkit": "latest",
     "@types/jasmine": "~4.3.0",
+    "gh-pages": "^6.1.1",
     "google-fonts-webpack-plugin": "^0.4.4",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

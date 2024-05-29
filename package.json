@@ -1,5 +1,4 @@
 {
-  "homepage": "https://RyanF96.github.io/ThrpyApp",
   "name": "thrpy-app",
   "version": "0.0.0",
   "scripts": {
@@ -7,9 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist/thrpy-app"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

@@ -1,19 +1,19 @@
 <ion-content>
     <div class="container">
         <div class="header">
-            <ion-icon routerLink="/dashboard" class="arrow-left" name="chevron-back-outline"></ion-icon>
+            <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
             <div>
-                Add Feeding
+                Add Pumping
             </div>
         </div>
         <hr>
         <div>
             <ion-toolbar>
-                <ion-segment value="all" (ionChange)="segmentChanged($event)">
-                    <ion-segment-button value="nursing">
-                        <ion-label>Nursing</ion-label>
+                <ion-segment value="pumping" (ionChange)="segmentChanged($event)">
+                    <ion-segment-button value="pumping">
+                        <ion-label>Pumping</ion-label>
                     </ion-segment-button>
-                    <ion-segment-button value="bottle">
+                    <ion-segment-button value="details">
                         <ion-label>Details</ion-label>
                     </ion-segment-button>
                 </ion-segment>
@@ -57,7 +57,7 @@
                     </ng-template>
                 </ion-popover>
             </ion-row>
-            <ng-container *ngIf="selectedSegment === 'nursing'">
+            <ng-container *ngIf="selectedSegment === 'pumping'">
 
                 <ion-row class="timer sleep-time" *ngIf="seconds || minutes || hours">
                     <div class="times">
@@ -70,26 +70,52 @@
                 </ion-row>
                 <ion-row *ngIf="state === 2">
                     <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
+                    <ion-col (click)="segmentChanged('details')" class="sleep-time">Details</ion-col>
                 </ion-row>
             </ng-container>
-            <ng-container *ngIf="selectedSegment === 'bottle'">
-                <Form [formGroup]="foodForm">
-                    <ion-list>
-                        <ion-item>
-                            <ion-select interface="popover" placeholder="Select Type" formControlName="foodType">
-                                <ion-select-option [value]="food" *ngFor="let food of foodTypes"
-                                    value="apples">{{food}}</ion-select-option>
-                            </ion-select>
-                        </ion-item>
-                    </ion-list>
+            <ng-container *ngIf="selectedSegment === 'details'">
+                <Form [formGroup]="pumpingForm">
+                    <ion-item>
+                        <ion-segment style="margin-bottom: 0;" formControlName="leftRight">
+                            <ion-segment-button [value]="false">
+                                <ion-label>Total</ion-label>
+                            </ion-segment-button>
+                            <ion-segment-button [value]="true">
+                                <ion-label>Left/Right</ion-label>
+                            </ion-segment-button>
+                        </ion-segment>
+                    </ion-item>
+                    <ion-item *ngIf="!getFormControlValue('leftRight')">
+                        <ion-range aria-label=" Custom range" [min]="0" [max]="60" [pin]="true" [ticks]="true"
+                            [snaps]="true" labelPlacement="start" label="Total" formControlName="total">
+                            <ion-label slot="start">0</ion-label>
+                            <ion-label slot="end">60 ml</ion-label>
+                        </ion-range>
+                    </ion-item>
+                    <ion-item *ngIf="getFormControlValue('leftRight')">
+                        <ion-range (ionChange)="updateTotal()" aria-label=" Custom range" [min]="0" [max]="30"
+                            [pin]="true" [ticks]="true" [snaps]="true" labelPlacement="start" label="Left"
+                            formControlName="left">
+                            <ion-label slot="start">0</ion-label>
+                            <ion-label slot="end">30 ml</ion-label>
+                        </ion-range>
+                    </ion-item>
+                    <ion-item *ngIf="getFormControlValue('leftRight')">
+                        <ion-range (ionChange)="updateTotal()" aria-label=" Custom range" [min]="0" [max]="30"
+                            [pin]="true" [ticks]="true" [snaps]="true" labelPlacement="start" label="Right"
+                            formControlName="right">
+                            <ion-label slot="start">0</ion-label>
+                            <ion-label slot="end">30 ml</ion-label>
+                        </ion-range>
+                    </ion-item>
                     <ion-row class="input-row">
                         <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
                     </ion-row>
                 </Form>
             </ng-container>
         </div>
-        <div class="save">
-            <div class="save-inner-container">
+        <div class="save" *ngIf="pumpingFormValid">
+            <div class=" save-inner-container">
                 <ion-row class="sleep-time">
                     <ion-button (click)="save()">
                         Save

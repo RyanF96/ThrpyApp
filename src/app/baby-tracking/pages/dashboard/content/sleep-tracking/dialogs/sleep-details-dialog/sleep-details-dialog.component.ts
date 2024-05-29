@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { IDetails, ISleepDetails } from 'src/app/data/contracts';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -14,20 +14,22 @@ export class SleepDetailsDialogComponent implements OnInit {
   startSleepDetails: IDetails[] = [];
   howItHappened: IDetails[] = [];
   endOfSleep: IDetails[] = [];
+  sleepDetails: ISleepDetails | undefined;
 
-  constructor(private formBuilder: FormBuilder, private modalController: ModalController, private commonService: CommonService) {
+  constructor(private navParams: NavParams, private formBuilder: FormBuilder, private modalController: ModalController, private commonService: CommonService) {
   }
 
   ngOnInit() {
-    this.createForm();
+    this.sleepDetails = this.navParams.get('details');
     this.setOptions();
+    this.createForm();
   }
 
   createForm() {
     this.detailsForm = this.formBuilder.group({
-      sleepStartIds: [[]],
-      howItHappenedIds: [[]],
-      endOfSleepIds: [[]]
+      sleepStartIds: [this.sleepDetails?.sleepStartIds ?? []],
+      howItHappenedIds: [this.sleepDetails?.howItHappenedIds ?? []],
+      endOfSleepIds: [this.sleepDetails?.endOfSleepIds ?? []]
     });
   }
 

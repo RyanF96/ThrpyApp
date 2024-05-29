@@ -1,0 +1,130 @@
+.container {
+    /* Some container-specific styles here */
+    font-family: "poppins";
+    padding: 0 10px 0 10px;
+    position: relative;
+    height: 100vh;
+
+    .header {
+        margin: 20px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+    }
+
+    ion-input {
+        border: 1px solid #B8926A;
+        border-radius: 24px;
+        padding: 0 10px !important;
+
+    }
+
+    .input-row {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    ion-segment {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .arrow-left {
+        position: absolute;
+        top: 0;
+        left: 5px;
+        font-size: 24px;
+        font-weight: 200;
+    }
+
+    hr {
+        border-top: 1px solid #333;
+        margin: 20px 0;
+    }
+
+    .sleep-time {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .timer {
+        position: absolute;
+        top: 240px;
+        left: 0;
+    }
+
+    ion-button::part(native) {
+        border-radius: 12px;
+        background-color: #B8926A;
+    }
+
+    ion-button {
+        width: 100%;
+        margin: 5px 0 5px 0;
+    }
+
+    .sleep-button-row {
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .times {
+        font-size: 20px;
+    }
+
+    .save {
+        bottom: 10px;
+        left: 0;
+        position: fixed;
+        width: 100%;
+    }
+
+    .save-inner-container {
+        margin: 0 10px;
+    }
+
+    ion-range::part(tick) {
+        background: #B5ACA3;
+    }
+
+    ion-range::part(tick-active) {
+        background: #B5ACA3;
+    }
+
+    ion-range::part(pin) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        background: #D4CBBE;
+        color: #fff;
+
+        border-radius: 50%;
+        transform: scale(1.01);
+
+        top: -20px;
+
+        min-width: 28px;
+        height: 28px;
+        transition: transform 120ms ease, background 120ms ease;
+    }
+
+    ion-range::part(pin)::before {
+        content: none;
+    }
+
+    ion-range::part(knob) {
+        background: #D9C2B0;
+    }
+
+    ion-range::part(bar) {
+        background: #B5ACA3;
+    }
+
+    ion-range::part(bar-active) {
+        background: #B5ACA3;
+    }
+}

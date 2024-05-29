@@ -1,13 +1,13 @@
 <ion-content>
     <div class="container">
         <div class="header">
-            <ion-icon routerLink="/dashboard" class="arrow-left" name="chevron-back-outline"></ion-icon>
+            <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
             <div>
                 Add Solids
             </div>
         </div>
         <hr>
-        <ng-container>
+        <ng-container *ngIf="solidsForm">
             <form [formGroup]="solidsForm">
                 <ion-row class="sleep-time">
                     <ion-button id="startDate">
@@ -32,15 +32,15 @@
                     <ion-item>
                         <ion-select label="Food" [multiple]="true" formControlName="food">
                             <ion-select-option *ngFor="let food of foodItems"
-                                [value]="food">{{food}}</ion-select-option>
+                                [value]="food.id">{{food.description}}</ion-select-option>
                         </ion-select>
                     </ion-item>
                 </ion-row>
                 <ion-row>
                     <ion-item>
-                        <ion-select label="Reaction" [multiple]="true" formControlName="reaction">
+                        <ion-select label="Reaction" [multiple]="true" formControlName="reactions">
                             <ion-select-option *ngFor="let reaction of reactions"
-                                [value]="reaction">{{reaction}}</ion-select-option>
+                                [value]="reaction.id">{{reaction.description}}</ion-select-option>
                         </ion-select>
                     </ion-item>
                 </ion-row>

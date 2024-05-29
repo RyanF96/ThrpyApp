@@ -40,7 +40,7 @@ export class AuthService {
   setUserContext(userId: string) {
     this.setUserStatus = true;
     localStorage.setItem('userId', userId);
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/thrpy');
   }
 
   logout(): void {

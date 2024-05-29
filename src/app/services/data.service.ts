@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Constants } from '../config/constants';
-import { IChild, IFood, ISetting, ISleep, ISleepDetailOptions, ISolids, IUserIn } from '../data/contracts';
+import { IChild, IDiaperDetails, IFood, IPumping, ISetting, ISleep, ISleepDetailOptions, ISolidFoodOptions, ISolids, IUserIn } from '../data/contracts';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +57,23 @@ export class DataService {
 
   public saveSolidDetails(solids: ISolids) {
     return this.http.post<boolean>(this.constants.HTTPS_API_ENDPOINT + 'food/solids', solids)
+  }
+
+  public getSolidFoodOptions() {
+    return this.http.get<{ [key: string]: string }>(this.constants.HTTPS_API_ENDPOINT + 'food/solid/options')
+  }
+
+  public getSolidsReactionOptions() {
+    return this.http.get<{ [key: string]: string }>(this.constants.HTTPS_API_ENDPOINT + 'food/solid/reaction/options')
+  }
+
+  //POTTY
+  public saveDiaperDetails(diaperDetails: IDiaperDetails){
+    return this.http.post<boolean>(this.constants.HTTPS_API_ENDPOINT + 'potty/save', diaperDetails)
+  }
+
+  //PUMPING
+  public savePumping(pumping: IPumping){
+    return this.http.post<boolean>(this.constants.HTTPS_API_ENDPOINT + 'food/pumping', pumping)
   }
 }

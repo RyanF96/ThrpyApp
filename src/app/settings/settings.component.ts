@@ -5,7 +5,7 @@ import { SettingsEnum } from 'src/app/data/enums';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { SettingsService } from 'src/app/services/settings.service';
-import { AddChildDialogComponent } from 'src/app/shared/dialogs/add-child-dialog/add-child-dialog.component';
+import { AddChildDialogComponent } from './add-child-dialog/add-child-dialog.component';
 
 @Component({
   selector: 'app-settings',

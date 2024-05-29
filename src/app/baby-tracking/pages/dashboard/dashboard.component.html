@@ -17,9 +17,11 @@
     </div>
     <div>
         <ion-row class="contents-row">
-            <div *ngFor="let item of itemList" class="item" (click)="navigate(item.url)">
-                <ion-icon [name]="item.icon"></ion-icon>
-                {{item.name}}
+            <div>
+                <div *ngFor="let item of itemList" class="item" (click)="navigate(item.url)">
+                    <ion-icon [name]="item.icon"></ion-icon>
+                    {{item.name}}
+                </div>
             </div>
         </ion-row>
     </div>

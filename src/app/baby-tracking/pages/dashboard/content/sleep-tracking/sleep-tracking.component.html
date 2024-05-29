@@ -1,7 +1,7 @@
 <ion-content>
     <div class="container">
         <div class="header">
-            <ion-icon routerLink="/dashboard" class="arrow-left" name="chevron-back-outline"></ion-icon>
+            <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
             <div>
                 Add Sleep
             </div>
@@ -9,7 +9,7 @@
         <hr>
         <div>
             <ion-row class="sleep-time">
-                <ion-button id="startDate">
+                <ion-button id="startDate" (click)="presentStartPopover($event)">
                     <ion-col>
                         Start time:
                     </ion-col>
@@ -20,15 +20,16 @@
                         <u>{{startDate | date:'shortTime'}}</u>
                     </ion-col>
                 </ion-button>
-                <ion-popover trigger="startDate" size="cover">
+                <ion-popover #startTimePopover [isOpen]="startIsOpen" (didDismiss)="startIsOpen = false" size="auto">
                     <ng-template>
                         <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm"
                             pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+                        <ion-button (click)="dismissStartPopover()">OK</ion-button>
                     </ng-template>
                 </ion-popover>
             </ion-row>
             <ion-row class="sleep-time">
-                <ion-button id="endDate">
+                <ion-button id="endDate" (click)="presentEndPopover($event)">
                     <ion-col>
                         End Time:
                     </ion-col>
@@ -39,11 +40,13 @@
                         <u>{{endDate | date:'shortTime'}}</u>
                     </ion-col>
                 </ion-button>
-                <ion-popover trigger="endDate" size="cover">
+                <ion-popover #endTimePopover trigger="endDate" size="auto" [isOpen]="endIsOpen"
+                    (didDismiss)="endIsOpen = false">
                     <ng-template>
                         <ion-datetime [(ngModel)]="endDate" displayFormat="MMM DD, YYYY HH:mm"
                             pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"
                             (ngModelChange)="manualTimeEntry()"></ion-datetime>
+                        <ion-button (click)="dismissEndPopover()">OK</ion-button>
                     </ng-template>
                 </ion-popover>
             </ion-row>

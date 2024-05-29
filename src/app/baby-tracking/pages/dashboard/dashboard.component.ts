@@ -16,29 +16,22 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.itemList.push(
-      { name: 'Sleep', icon: 'bed-outline', url: '/sleep' },
-      { name: 'Feeding', icon: 'beer-outline', url: '/food' },
-      { name: 'Solids', icon: 'pizza-outline', url: '/solids' },
-      { name: 'Diaper', icon: 'sad-outline', url: 'sleep' },
-      { name: 'Potty', icon: 'ear-outline', url: 'sleep' },
-      { name: 'Pumping', icon: 'breast-pump', url: 'sleep' },
-      { name: 'Medicine', icon: 'medical-kit', url: 'sleep' },
-      { name: 'Growth', icon: 'growth-chart', url: 'sleep' },
-      { name: 'Temperature', icon: 'thermometer', url: 'sleep' },
-      { name: 'Activity', icon: 'playground', url: 'sleep' }
+      { name: 'Sleep', icon: 'bed-outline', url: 'thrpy/tracking/sleep' },
+      { name: 'Feeding', icon: 'beer-outline', url: 'thrpy/tracking/food' },
+      { name: 'Solids', icon: 'pizza-outline', url: 'thrpy/tracking/solids' },
+      { name: 'Diaper/Potty', icon: 'sad-outline', url: 'thrpy/tracking/diaper' },
+      { name: 'Pumping', icon: 'breast-pump', url: 'thrpy/tracking/pumping' },
+      // { name: 'Medicine', icon: 'medical-kit', url: 'sleep' },
+      // { name: 'Growth', icon: 'growth-chart', url: 'sleep' },
+      // { name: 'Temperature', icon: 'thermometer', url: 'sleep' },
+      // { name: 'Activity', icon: 'playground', url: 'sleep' }
     );
     this.getSettings();
-    this.getSleepDetailOptions();
   }
 
   getSettings() {
     this.settingsService.getSettings().subscribe((res) => {
     });
-  }
-
-  getSleepDetailOptions() {
-    this.commonService.getSleepDetailOptions().subscribe((res) => {
-    })
   }
 
   navigateToSettings() {

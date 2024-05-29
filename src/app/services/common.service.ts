@@ -53,4 +53,12 @@ export class CommonService {
   saveSolidDetails(solids: ISolids) {
     return this.dataService.saveSolidDetails(solids);
   }
+
+  getSolidFoodOptions() {
+    return this.dataService.getSolidFoodOptions();
+  }
+
+  getSolidsReactionOptions(){
+    return this.dataService.getSolidsReactionOptions();
+  }
 }

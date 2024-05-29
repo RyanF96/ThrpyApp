@@ -67,7 +67,9 @@ export class TimerBase {
 
     manualTimeEntry() {
         this.endDate = Date.parse(this.endDate.toString());
-        this.startDate = Date.parse(this.startDate.toString());
+        // Assuming startDate is already a Date object
+        this.startDate = !isNaN(Date.parse(this.startDate.toString())) ? Date.parse(this.startDate.toString()) : this.startDate;
+
         this.calculateTime(this.startDate, this.endDate);
         this.state = 2;
     }

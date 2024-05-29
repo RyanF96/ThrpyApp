@@ -50,10 +50,40 @@ export interface IFood {
     foodType: string;
 }
 
+export interface IPumping {
+    childId: string;
+    startDate: Date;
+    endDate: Date;
+    duration: number;
+    total: number;
+    left?: number;
+    right?: number;
+    notes?: string;
+}
+
 export interface ISolids {
     childId: string;
     startTime: Date;
-    food: string;
-    reaction?: string;
+    food: string[];
+    reactions?: string[];
+    notes?: string;
+}
+
+export interface ISolidFoodOptions {
+    Id: string;
+    Name: string;
+}
+
+export interface IDiaperDetails {
+    type: string;
+    startTime: Date;
+    childId: string;
+    diaperType?: string;
+    diaperSize?: string;
+    peeSize?: string;
+    diaperColor?: string;
+    diaperDescription?: string;
+    pottyDetails?: string;
+    diaperRash?: boolean;
     notes?: string;
 }

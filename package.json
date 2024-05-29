@@ -8,9 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy": "ng build --configuration production --base-href /thrpy-app/ && npm run postbuild",
-    "deploy": "gh-pages -d dist/thrpy-app",
-    "postbuild": "cp-cli 404.html dist/thrpy-app/404.html"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist/thrpy-app"
   },
   "private": true,
   "dependencies": {
@@ -36,7 +35,6 @@
     "@ionic/angular-toolkit": "latest",
     "@types/jasmine": "~4.3.0",
     "angular-cli-ghpages": "^2.0.0",
-    "cp-cli": "^2.0.0",
     "gh-pages": "^6.1.1",
     "google-fonts-webpack-plugin": "^0.4.4",
     "jasmine-core": "~4.6.0",

@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy": "ng build --prod --base-href /<repository-name>/ && npm run postbuild",
+    "predeploy": "ng build --prod --base-href /thrpy-app/ && npm run postbuild",
     "deploy": "gh-pages -d dist/thrpy-app",
     "postbuild": "cp-cli 404.html dist/thrpy-app/404.html"
   },

@@ -70,11 +70,12 @@ export class SignUpComponent implements OnDestroy {
           firebaseId: user.uid,
           password: userForm.password
         } as IUserIn
-        this.dataService.register(myUser).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
-          if (res) {
-            this.router.navigateByUrl('/login');
-          }
-        });
+        // this.dataService.register(myUser).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
+        //   if (res) {
+        //     this.router.navigateByUrl('/login');
+        //   }
+        // });
+        this.router.navigateByUrl('/login');
       })
       .catch((error) => {
         console.error('Registration error:', error.code + ':' + error.message);

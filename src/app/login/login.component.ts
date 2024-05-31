@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit, OnDestroy {
               .catch((error) => {
                 console.error('Error getting access token:', error);
               });
-            this.authService.login(user.uid).pipe(takeUntil(this.componentDestroyed$)).subscribe();
+            //this.authService.login(user.uid).pipe(takeUntil(this.componentDestroyed$)).subscribe();
+            this.router.navigateByUrl('/thrpy');
           })
         }
       })

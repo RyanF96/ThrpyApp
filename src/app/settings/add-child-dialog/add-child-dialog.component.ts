@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class AddChildDialogComponent implements OnInit {
   childForm!: FormGroup;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController) {}
 
   ngOnInit() {
     this.createForm();
@@ -22,7 +22,7 @@ export class AddChildDialogComponent implements OnInit {
 
   createForm() {
     this.childForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required)
     });
   }
 
@@ -36,5 +36,4 @@ export class AddChildDialogComponent implements OnInit {
       this.modalController.dismiss(name);
     }
   }
-
 }

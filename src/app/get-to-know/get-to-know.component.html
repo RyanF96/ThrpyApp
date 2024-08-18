@@ -1,0 +1,76 @@
+<ion-content class="ion-padding">
+  <div class="get-to-know-container">
+    <div class="header-container">
+      <div class="logo-icon-container">
+        <ion-img src="assets/Logo_Header_Icon.png" alt="Logo Icon" class="logo-icon"></ion-img>
+      </div>
+      <div class="welcome-text-container">
+        <h1>Welcome to grow</h1>
+      </div>
+    </div>
+    <div class="parent-swiper-container">
+      <swiper-container #swiper (swiperinit)="swiperInit($event)" [loop]="false" [pagination]="true">
+        <swiper-slide class="slide-one">
+          <div class="slide-header"><h1>Every Milestone, Every Moment, Every Step of the Way</h1></div>
+          <div class="slide-image-container">
+            <ion-img src="assets/Hand_Using_Touch_Screen.jpg" alt="Slide one image" class="slide-image"></ion-img>
+          </div>
+          <div class="slide-header"><h1>Created by experts, used by mothers everywhere</h1></div>
+        </swiper-slide>
+        <swiper-slide class="slide-two">
+          <ion-row class="icon-row">
+            <ion-col class="slide-image-col" size="3">
+              <ion-img src="assets/App_Icon_02.svg" alt="Slide two image-icon" class="slide-image"></ion-img>
+            </ion-col>
+            <ion-col class="slide-description-col" size="9">
+              <ion-row>
+                <h1>Baby Tracking</h1>
+              </ion-row>
+              <ion-row>
+                <h2>Keep track of all related past and active data</h2>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="icon-row">
+            <ion-col class="slide-image-col" size="3">
+              <ion-img src="assets/App_Icon_01.svg" alt="Slide two image-icon" class="slide-image"></ion-img>
+            </ion-col>
+            <ion-col class="slide-description-col" size="9">
+              <ion-row>
+                <h1>Insights</h1>
+              </ion-row>
+              <ion-row>
+                <h2>Have access to important history content for fast insight comparisons</h2>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ion-row class="icon-row">
+            <ion-col class="slide-image-col" size="3">
+              <ion-img src="assets/App_Icon_03.svg" alt="Slide two image-icon" class="slide-image"></ion-img>
+            </ion-col>
+            <ion-col class="slide-description-col" size="9">
+              <ion-row>
+                <h1>Baby Development</h1>
+              </ion-row>
+              <ion-row>
+                <h2>See how your baby develops day by day</h2>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </swiper-slide>
+      </swiper-container>
+      <div class="actions-container">
+        <ion-row>
+          <ion-button (click)="nextSlide()" class="next-button"> Next </ion-button>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col class="footer-container"> already have an account? <a routerLink="/login">Login</a> </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

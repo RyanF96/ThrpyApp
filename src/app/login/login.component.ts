@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,10 +14,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   email!: FormControl;
   password!: FormControl;
   storeData: string | null = '';
-  isUserLoggedIn: boolean = false;
+  isUserLoggedIn = false;
   componentDestroyed$ = new Subject();
 
-  constructor(private authService: AuthService, private router: Router, private auth: Auth) { }
+  constructor(private authService: AuthService, private auth: Auth) {}
 
   ngOnInit() {
     this.createFormControls();
@@ -26,8 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   createFormControls() {
-    this.email = new FormControl(null, Validators.required),
-      this.password = new FormControl(null, Validators.required)
+    (this.email = new FormControl(null, Validators.required)), (this.password = new FormControl(null, Validators.required));
   }
 
   createForm() {
@@ -38,13 +36,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   SignIn() {
-    let user = this.loginForm.value;
+    const user = this.loginForm.value;
     signInWithEmailAndPassword(this.auth, user.email, user.password)
       .then((userCredential) => {
         if (userCredential) {
           this.auth.authStateReady().then(() => {
             const user = userCredential.user;
-            user.getIdToken()
+            user
+              .getIdToken()
               .then((accessToken) => {
                 localStorage.setItem('accessToken', accessToken);
               })
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
                 console.error('Error getting access token:', error);
               });
             this.authService.login(user.uid).pipe(takeUntil(this.componentDestroyed$)).subscribe();
-          })
+          });
         }
       })
       .catch((error) => {

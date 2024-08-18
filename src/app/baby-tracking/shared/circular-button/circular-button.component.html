@@ -1,13 +1,7 @@
 <div class="button-wrapper">
-    <button (click)="emitClick()" class="circular-button">
-        <div *ngIf="state === 0" class="center-content">
-            <ion-icon name="play-outline"></ion-icon>Start
-        </div>
-        <div *ngIf="state === 1" class="center-content">
-            <ion-icon name="stop-outline"></ion-icon>Stop
-        </div>
-        <div *ngIf="state === 2" class="center-content">
-            <ion-icon name="stop-outline"></ion-icon>Resume
-        </div>
-    </button>
+  <button (click)="emitClick()" class="circular-button">
+    <div *ngIf="state === 0" class="center-content"><ion-icon name="play-outline"></ion-icon>Start</div>
+    <div *ngIf="state === 1" class="center-content"><ion-icon name="stop-outline"></ion-icon>Stop</div>
+    <div *ngIf="state === 2" class="center-content"><ion-icon name="stop-outline"></ion-icon>Resume</div>
+  </button>
 </div>

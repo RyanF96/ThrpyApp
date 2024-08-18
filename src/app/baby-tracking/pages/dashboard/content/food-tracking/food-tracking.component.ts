@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TimerBase } from '../timer-base/timer-base';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IFood } from 'src/app/data/contracts';
-import { SettingsService } from 'src/app/services/settings.service';
 import { SettingsEnum } from 'src/app/data/enums';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -12,11 +11,11 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./food-tracking.component.scss']
 })
 export class FoodTrackingComponent extends TimerBase implements OnInit {
-  selectedSegment: string = 'nursing';
+  selectedSegment = 'nursing';
   foodForm!: FormGroup;
   foodTypes: string[] = ['Breast Milk', 'Formula', 'Tube Feeding', 'Cow Milk', 'Goat Milk', 'Soy Milk', 'Other'];
 
-  constructor(private settingsService: SettingsService, private commonService: CommonService) {
+  constructor(private commonService: CommonService) {
     super();
   }
 
@@ -32,13 +31,13 @@ export class FoodTrackingComponent extends TimerBase implements OnInit {
     this.foodForm = new FormGroup({
       foodType: new FormControl('', Validators.required),
       notes: new FormControl('')
-    })
+    });
   }
 
   save() {
     const settings = localStorage.getItem('settings');
     if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
       const food = {
         childId: childId,
         duration: this.elapsedTime,

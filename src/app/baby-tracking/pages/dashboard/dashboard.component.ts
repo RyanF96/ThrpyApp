@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { CommonService } from 'src/app/services/common.service';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -9,10 +7,10 @@ import { SettingsService } from 'src/app/services/settings.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   itemList: any[] = [];
 
-  constructor(private router: Router, private settingsService: SettingsService, private commonService: CommonService) { }
+  constructor(private router: Router, private settingsService: SettingsService) {}
 
   ngOnInit(): void {
     this.itemList.push(
@@ -20,7 +18,7 @@ export class DashboardComponent {
       { name: 'Feeding', icon: 'beer-outline', url: 'thrpy/tracking/food' },
       { name: 'Solids', icon: 'pizza-outline', url: 'thrpy/tracking/solids' },
       { name: 'Diaper/Potty', icon: 'sad-outline', url: 'thrpy/tracking/diaper' },
-      { name: 'Pumping', icon: 'breast-pump', url: 'thrpy/tracking/pumping' },
+      { name: 'Pumping', icon: 'breast-pump', url: 'thrpy/tracking/pumping' }
       // { name: 'Medicine', icon: 'medical-kit', url: 'sleep' },
       // { name: 'Growth', icon: 'growth-chart', url: 'sleep' },
       // { name: 'Temperature', icon: 'thermometer', url: 'sleep' },
@@ -31,6 +29,7 @@ export class DashboardComponent {
 
   getSettings() {
     this.settingsService.getSettings().subscribe((res) => {
+      //TODO?
     });
   }
 

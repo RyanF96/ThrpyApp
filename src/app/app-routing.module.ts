@@ -4,32 +4,33 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LayoutComponent } from './layout/layout.component';
+import { GetToKnowComponent } from './get-to-know/get-to-know.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'get-to-know', component: GetToKnowComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'settings', component: SettingsComponent },
   {
-    path: 'thrpy', component: LayoutComponent,
+    path: 'thrpy',
+    component: LayoutComponent,
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'tracking',
+        redirectTo: 'tracking'
       },
       {
         path: 'tracking',
-        loadChildren: () => import('./baby-tracking/baby-tracking.module').then(m => m.BabyTrackingModule),
-      },
+        loadChildren: () => import('./baby-tracking/baby-tracking.module').then((m) => m.BabyTrackingModule)
+      }
     ]
-  },
-
-
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

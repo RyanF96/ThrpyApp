@@ -1,81 +1,90 @@
-/* Styles for the container class */
-.container {
-    /* Some container-specific styles here */
-    font-family: "poppins";
-    padding: 0 10px 0 10px;
+.register-container {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
 
-    /* Styles for ion-content inside .container */
-    ion-content {
-        --background: white;
+  ion-content {
+    --background: white;
+  }
+
+  ion-input {
+    border: 1px solid #b8926a;
+    border-radius: 24px;
+    padding: 0 10px !important;
+  }
+
+  .header-container {
+    margin: 20px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header-image-container {
+      margin-bottom: 10px;
+      .header-image {
+        width: 13vh;
+        height: 13vh;
+      }
     }
 
-    ion-input {
-        border: 1px solid #B8926A;
-        border-radius: 24px;
-        padding: 0 10px !important;
+    .sign-up-header {
+      margin: 0px !important;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
 
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-row {
+      width: 100%;
+      margin: 10px 20px 10px 20px;
+
+      ion-input {
+        color: white;
+        border: none;
+        background-color: rgba(170, 170, 170);
+      }
     }
 
     .alert {
-        margin: 0 20px 0 20px;
-        color: red;
-        font-size: 12px;
+      margin: 0 20px 0 20px;
+      color: red;
+      font-size: 12px;
+    }
+  }
 
+  .actions-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .sign-button {
+      color: white;
+      font-family: 'poppins';
+      letter-spacing: 1.5px;
+      --background: rgba(227, 34, 69);
+      --border-radius: 24px;
+      width: 120px;
+      margin-bottom: 10px;
     }
 
-    ion-button::part(native) {
-        border-radius: 24px;
-        background-color: #B8926A;
+    .policy-header {
+      text-align: center;
+      font-size: 12px;
     }
+  }
+}
 
-    .input-row {
-        width: 100%;
-        margin: 10px 20px 10px 20px;
-    }
+.footer-container {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
+  text-align: center;
 
-    .button-row {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        padding: 0 20px;
-        margin-top: 20px;
-    }
-
-    .welcome {
-        font-size: 24px;
-        font-weight: 500;
-    }
-
-    .space {
-        margin-top: 20px;
-    }
-
-    /* Styles for hr inside .container */
-    hr {
-        border-top: 1px solid #333;
-        margin: 20px 0;
-    }
-
-    /* Styles for div inside .container */
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Styles for .header inside .container */
-    .header {
-        margin: 20px;
-        display: flex;
-        align-items: center;
-        align-content: center;
-    }
-
-    .welcome-container {
-        margin: 20px;
-    }
-
-    .center-text {
-        text-align: center;
-    }
+  a {
+    color: rgba(128, 186, 223);
+  }
 }

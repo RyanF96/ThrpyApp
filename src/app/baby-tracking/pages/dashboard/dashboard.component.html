@@ -1,29 +1,26 @@
 <div class="container">
-
-    <div class="header-container">
-        <ion-row class="profile-row">
-            <ion-col class="profile-col" size="4">
-                <ion-icon class="icon" name="person-circle-outline"></ion-icon>
-                profile
-            </ion-col>
-            <ion-col class="icon-col" size="4">icon</ion-col>
-            <ion-col class="settings-col" size="4">
-                <ion-button fill="clear" (click)="navigateToSettings()">
-                    <ion-icon class="icon" name="settings-outline"></ion-icon>
-                </ion-button>
-            </ion-col>
-        </ion-row>
-
-    </div>
-    <div>
-        <ion-row class="contents-row">
-            <div>
-                <div *ngFor="let item of itemList" class="item" (click)="navigate(item.url)">
-                    <ion-icon [name]="item.icon"></ion-icon>
-                    {{item.name}}
-                </div>
-            </div>
-        </ion-row>
-    </div>
-
+  <div class="header-container">
+    <ion-row class="profile-row">
+      <ion-col class="profile-col" size="4">
+        <ion-icon class="icon" name="person-circle-outline"></ion-icon>
+        profile
+      </ion-col>
+      <ion-col class="icon-col" size="4">icon</ion-col>
+      <ion-col class="settings-col" size="4">
+        <ion-button fill="clear" (click)="navigateToSettings()">
+          <ion-icon class="icon" name="settings-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row class="contents-row">
+      <div>
+        <div *ngFor="let item of itemList" class="item" (click)="navigate(item.url)">
+          <ion-icon [name]="item.icon"></ion-icon>
+          {{ item.name }}
+        </div>
+      </div>
+    </ion-row>
+  </div>
 </div>

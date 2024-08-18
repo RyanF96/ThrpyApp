@@ -1,59 +1,59 @@
 .container {
+  .header-container {
+    background-color: #a6a998;
+    height: 20vh;
+    padding-top: 10px;
+    border-radius: 0 0 5px 5px;
+    border-bottom: 1px solid #898979;
+  }
 
-    .header-container {
-        background-color: #a6a998;
-        height: 20vh;
-        padding-top: 10px;
-        border-radius: 0 0 5px 5px;
-        border-bottom: 1px solid #898979;
-    }
+  .profile-row {
+  }
 
-    .profile-row {}
+  .contents-row {
+    height: 73vh;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+  }
 
-    .contents-row {
-        height: 73vh;
-        overflow-y: scroll;
-        display: flex;
-        justify-content: center;
-    }
+  .item {
+    width: 90vw;
+    height: 15vw;
+    background-color: #d4cbbe;
+    border-radius: 5px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(129, 122, 105);
+    font-weight: 700;
+    font-size: 18px;
+    border: 1px solid rgb(171, 162, 141);
+  }
 
-    .item {
-        width: 90vw;
-        height: 15vw;
-        background-color: #d4cbbe;
-        border-radius: 5px;
-        margin: 10px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: rgb(129, 122, 105);
-        font-weight: 700;
-        font-size: 18px;
-        border: 1px solid rgb(171, 162, 141);
-    }
+  ion-col {
+    display: flex;
 
-    ion-col {
-        display: flex;
+    align-items: center;
+    color: white;
+  }
 
-        align-items: center;
-        color: white;
-    }
+  .profile-col {
+    justify-content: start;
+  }
 
-    .profile-col {
-        justify-content: start;
-    }
+  .icon-col {
+    justify-content: center;
+  }
 
-    .icon-col {
-        justify-content: center;
-    }
+  .settings-col {
+    justify-content: end;
+  }
 
-    .settings-col {
-        justify-content: end;
-    }
-
-    .icon {
-        font-size: 28px;
-        margin-right: 5px;
-        color: white;
-    }
+  .icon {
+    font-size: 28px;
+    margin-right: 5px;
+    color: white;
+  }
 }

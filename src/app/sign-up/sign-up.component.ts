@@ -1,11 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { NavigationEnd, Router } from '@angular/router';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { Subject, takeUntil } from 'rxjs';
 import { IUserIn } from 'src/app/data/contracts';
-import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnDestroy {
+export class SignUpComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   username!: FormControl;
   email!: FormControl;
@@ -21,7 +20,17 @@ export class SignUpComponent implements OnDestroy {
   confirmPassword!: FormControl;
   componentDestroyed$ = new Subject();
 
-  constructor(private dataService: DataService, private router: Router, private authService: AuthService, private auth: Auth) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private auth: Auth
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        console.log('Navigation ended:', event.urlAfterRedirects);
+      }
+    });
+  }
 
   ngOnInit() {
     this.createFormControls();
@@ -29,15 +38,13 @@ export class SignUpComponent implements OnDestroy {
   }
 
   createFormControls() {
-    this.username = new FormControl(null, Validators.required),
-      this.password = new FormControl(null, [Validators.required,
-      Validators.minLength(8),
-      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]),
-      this.confirmPassword = new FormControl(null, Validators.required),
-      this.email = new FormControl(null, {
+    (this.username = new FormControl(null, Validators.required)),
+      (this.password = new FormControl(null, [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)])),
+      (this.confirmPassword = new FormControl(null, Validators.required)),
+      (this.email = new FormControl(null, {
         validators: [Validators.required, Validators.email],
-        updateOn: 'change',
-      });
+        updateOn: 'change'
+      }));
   }
 
   createForm() {
@@ -53,11 +60,12 @@ export class SignUpComponent implements OnDestroy {
     if (this.registerForm.valid !== true) {
       return;
     }
-    let userForm = this.registerForm.value as IUserIn;
+    const userForm = this.registerForm.value as IUserIn;
     createUserWithEmailAndPassword(this.auth, userForm.email, userForm.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        user.getIdToken()
+        user
+          .getIdToken()
           .then((accessToken) => {
             localStorage.setItem('accessToken', accessToken);
           })
@@ -69,12 +77,15 @@ export class SignUpComponent implements OnDestroy {
           username: userForm.username,
           firebaseId: user.uid,
           password: userForm.password
-        } as IUserIn
-        this.dataService.register(myUser).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
-          if (res) {
-            this.router.navigateByUrl('/login');
-          }
-        });
+        } as IUserIn;
+        this.dataService
+          .register(myUser)
+          .pipe(takeUntil(this.componentDestroyed$))
+          .subscribe((res) => {
+            if (res) {
+              this.router.navigateByUrl('/login');
+            }
+          });
       })
       .catch((error) => {
         console.error('Registration error:', error.code + ':' + error.message);

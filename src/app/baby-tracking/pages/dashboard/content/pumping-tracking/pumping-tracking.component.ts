@@ -4,9 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { IPumping } from 'src/app/data/contracts';
 import { SettingsEnum } from 'src/app/data/enums';
-import { CommonService } from 'src/app/services/common.service';
 import { DataService } from 'src/app/services/data.service';
-import { SettingsService } from 'src/app/services/settings.service';
 import { TimerBase } from '../timer-base/timer-base';
 
 @Component({
@@ -15,15 +13,16 @@ import { TimerBase } from '../timer-base/timer-base';
   styleUrls: ['./pumping-tracking.component.scss']
 })
 export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDestroy {
-  selectedSegment: string = 'pumping';
+  selectedSegment = 'pumping';
   pumpingForm!: FormGroup;
   componentDestroyed$ = new Subject();
-  constructor(private settingsService: SettingsService, private commonService: CommonService, private dataService: DataService, private toastController: ToastController) {
+
+  constructor(private dataService: DataService, private toastController: ToastController) {
     super();
   }
 
   get pumpingFormValid() {
-    return this.pumpingForm.valid && this.pumpingForm.dirty
+    return this.pumpingForm.valid && this.pumpingForm.dirty;
   }
 
   ngOnInit() {
@@ -47,7 +46,7 @@ export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDes
       right: new FormControl(0),
       startDate: new FormControl(this.startDate),
       endDate: new FormControl(this.endDate)
-    })
+    });
   }
 
   updateTotal() {
@@ -58,7 +57,7 @@ export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDes
   save() {
     const settings = localStorage.getItem('settings');
     if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
       const pumping = {
         childId: childId,
         duration: this.elapsedTime,
@@ -71,26 +70,27 @@ export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDes
       } as IPumping;
 
       if (pumping.total > 0) {
-
-        this.dataService.savePumping(pumping).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
-          if (res) {
-            this.pumpingForm.reset();
-            this.reset();
-            this.presentToast('Saved Successfuly!');
-          }
-        })
+        this.dataService
+          .savePumping(pumping)
+          .pipe(takeUntil(this.componentDestroyed$))
+          .subscribe((res) => {
+            if (res) {
+              this.pumpingForm.reset();
+              this.reset();
+              this.presentToast('Saved Successfuly!');
+            }
+          });
       } else {
-        this.presentToast('Please enter an amount.')
+        this.presentToast('Please enter an amount.');
       }
     }
   }
-
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 1500,
-      position: "bottom",
+      position: 'bottom'
     });
 
     await toast.present();

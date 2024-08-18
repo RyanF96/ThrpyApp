@@ -9,7 +9,7 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class AuthService {
-  userLoggedIn: boolean = false;
+  userLoggedIn = false;
 
   get isUserLoggedIn() {
     return this.userLoggedIn;
@@ -19,22 +19,26 @@ export class AuthService {
     this.userLoggedIn = loggedIn;
   }
 
-  constructor(private dataService: DataService, private router: Router, private auth: Auth) { }
+  constructor(private dataService: DataService, private router: Router, private auth: Auth) {}
 
   register(user: IUserIn) {
-    this.dataService.register(user).pipe(map((userId) => {
-      if (userId) {
-        this.setUserContext(userId);
-      }
-    }));
+    this.dataService.register(user).pipe(
+      map((userId) => {
+        if (userId) {
+          this.setUserContext(userId);
+        }
+      })
+    );
   }
 
   login(firebaseId: string) {
-    return this.dataService.login(firebaseId).pipe(map((userId) => {
-      if (userId) {
-        this.setUserContext(userId);
-      }
-    }))
+    return this.dataService.login(firebaseId).pipe(
+      map((userId) => {
+        if (userId) {
+          this.setUserContext(userId);
+        }
+      })
+    );
   }
 
   setUserContext(userId: string) {

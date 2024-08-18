@@ -1,71 +1,71 @@
 .container {
-    /* Some container-specific styles here */
-    font-family: "poppins";
-    padding: 0 10px 0 10px;
-    position: relative;
-    height: 100vh;
+  /* Some container-specific styles here */
+  font-family: 'poppins';
+  padding: 0 10px 0 10px;
+  position: relative;
+  height: 100vh;
 
- .header {
+  .header {
     margin: 20px;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
-}
+  }
 
- .arrow-left {
+  .arrow-left {
     position: absolute;
     top: 0;
     left: 5px;
     font-size: 24px;
     font-weight: 200;
-}
+  }
 
- hr {
+  hr {
     border-top: 1px solid #333;
     margin: 20px 0;
-}
+  }
 
- .sleep-time {
+  .sleep-time {
     width: 100%;
     display: flex;
     justify-content: center;
-}
+  }
 
- .timer {
+  .timer {
     position: absolute;
     top: 180px;
     left: 0;
-}
+  }
 
- ion-button::part(native) {
+  ion-button::part(native) {
     border-radius: 12px;
-    background-color: #B8926A;
-}
+    background-color: #b8926a;
+  }
 
- ion-button {
+  ion-button {
     width: 100%;
     margin: 5px 0 5px 0;
-}
+  }
 
- .sleep-button-row {
+  .sleep-button-row {
     margin-top: 100px;
     display: flex;
     justify-content: center;
-}
+  }
 
- .times {
+  .times {
     font-size: 20px;
-}
+  }
 
- .save {
+  .save {
     bottom: 10px;
     left: 0;
     position: fixed;
     width: 100%;
-}
+  }
 
- .save-inner-container {
+  .save-inner-container {
     margin: 0 10px;
-}
+  }
 }

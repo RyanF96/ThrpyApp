@@ -16,8 +16,7 @@ export class SleepDetailsDialogComponent implements OnInit {
   endOfSleep: IDetails[] = [];
   sleepDetails: ISleepDetails | undefined;
 
-  constructor(private navParams: NavParams, private formBuilder: FormBuilder, private modalController: ModalController, private commonService: CommonService) {
-  }
+  constructor(private navParams: NavParams, private formBuilder: FormBuilder, private modalController: ModalController, private commonService: CommonService) {}
 
   ngOnInit() {
     this.sleepDetails = this.navParams.get('details');
@@ -44,8 +43,7 @@ export class SleepDetailsDialogComponent implements OnInit {
   }
 
   save() {
-    let sleepDetails = this.detailsForm.value as ISleepDetails;
+    const sleepDetails = this.detailsForm.value as ISleepDetails;
     this.modalController.dismiss(sleepDetails);
   }
-
 }

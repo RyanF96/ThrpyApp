@@ -15,12 +15,12 @@ import { AddChildDialogComponent } from './add-child-dialog/add-child-dialog.com
 export class SettingsComponent implements OnInit {
   children: IChild[] | undefined;
   userId: string | undefined;
-  constructor(private authService: AuthService, private dataService: DataService, private modalController: ModalController, private settingsService: SettingsService) { }
+  constructor(private authService: AuthService, private dataService: DataService, private modalController: ModalController, private settingsService: SettingsService) {}
 
   get selectedChildId(): string | undefined {
     const settings = localStorage.getItem('settings');
     if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
       return childId;
     }
     return;
@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
         if (res) {
           this.children = res;
         }
-      })
+      });
     }
   }
 
@@ -47,9 +47,9 @@ export class SettingsComponent implements OnInit {
           if (res) {
             this.children?.push(res);
           }
-        })
+        });
       }
-    })
+    });
     return await modal.present();
   }
 
@@ -59,6 +59,7 @@ export class SettingsComponent implements OnInit {
       value: child.id
     } as ISetting;
     this.settingsService.saveSetting(setting).subscribe((res) => {
+      //TODO?
     });
   }
 

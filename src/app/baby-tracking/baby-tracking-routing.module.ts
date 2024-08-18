@@ -14,11 +14,10 @@ const routes: Routes = [
   { path: 'thrpy/tracking/solids', component: SolidsTrackingComponent },
   { path: 'thrpy/tracking/diaper', component: DiaperTrackingComponent },
   { path: 'thrpy/tracking/pumping', component: PumpingTrackingComponent }
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BabyTrackingRoutingModule { }
+export class BabyTrackingRoutingModule {}

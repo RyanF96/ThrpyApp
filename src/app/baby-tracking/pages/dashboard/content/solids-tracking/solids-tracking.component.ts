@@ -18,8 +18,7 @@ export class SolidsTrackingComponent implements OnInit, OnDestroy {
   reactions: IDetails[] = [];
   solidsForm!: FormGroup;
 
-  constructor(private commonService: CommonService, private toastController: ToastController) {
-  }
+  constructor(private commonService: CommonService, private toastController: ToastController) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -37,10 +36,10 @@ export class SolidsTrackingComponent implements OnInit, OnDestroy {
     }).subscribe({
       next: (results) => {
         if (results.solidFoodOptions) {
-          this.foodItems = Object.keys(results.solidFoodOptions).map(key => ({ id: key, description: results.solidFoodOptions[key] }) as IDetails);
+          this.foodItems = Object.keys(results.solidFoodOptions).map((key) => ({ id: key, description: results.solidFoodOptions[key] } as IDetails));
         }
         if (results.solidsReactionOptions) {
-          this.reactions = Object.keys(results.solidsReactionOptions).map(key => ({ id: key, description: results.solidsReactionOptions[key] }) as IDetails);
+          this.reactions = Object.keys(results.solidsReactionOptions).map((key) => ({ id: key, description: results.solidsReactionOptions[key] } as IDetails));
         }
       },
       error: (error) => {
@@ -55,21 +54,24 @@ export class SolidsTrackingComponent implements OnInit, OnDestroy {
       food: new FormControl('', Validators.required),
       reactions: new FormControl(''),
       notes: new FormControl('')
-    })
+    });
   }
 
   save() {
     if (this.solidsForm.valid) {
-      let solids = this.solidsForm.value as ISolids;
+      const solids = this.solidsForm.value as ISolids;
       const settings = localStorage.getItem('settings');
       if (settings) {
-        solids.childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
-        this.commonService.saveSolidDetails(solids).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
-          if (res) {
-            this.presentToast('Saved Successfuly!')
-            this.solidsForm.reset();
-          }
-        });
+        solids.childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
+        this.commonService
+          .saveSolidDetails(solids)
+          .pipe(takeUntil(this.componentDestroyed$))
+          .subscribe((res) => {
+            if (res) {
+              this.presentToast('Saved Successfuly!');
+              this.solidsForm.reset();
+            }
+          });
       }
     }
   }
@@ -78,7 +80,7 @@ export class SolidsTrackingComponent implements OnInit, OnDestroy {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000,
-      position: 'bottom',
+      position: 'bottom'
     });
 
     await toast.present();
@@ -88,5 +90,4 @@ export class SolidsTrackingComponent implements OnInit, OnDestroy {
     this.componentDestroyed$.complete();
     this.componentDestroyed$.next(true);
   }
-
 }

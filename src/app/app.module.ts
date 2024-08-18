@@ -5,7 +5,7 @@ import { provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonicSlides } from '@ionic/angular';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,16 +17,10 @@ import { LayoutComponent } from './layout/layout.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddChildDialogComponent } from './settings/add-child-dialog/add-child-dialog.component';
-
+import { GetToKnowComponent } from './get-to-know/get-to-know.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SignUpComponent,
-    SettingsComponent,
-    LayoutComponent,
-    AddChildDialogComponent
-  ],
+  declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,6 +40,7 @@ import { AddChildDialogComponent } from './settings/add-child-dialog/add-child-d
       multi: true
     }
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

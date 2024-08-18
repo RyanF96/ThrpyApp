@@ -12,7 +12,6 @@ import { CircularButtonComponent } from './shared/circular-button/circular-butto
 import { DiaperTrackingComponent } from './pages/dashboard/content/diaper-tracking/diaper-tracking.component';
 import { PumpingTrackingComponent } from './pages/dashboard/content/pumping-tracking/pumping-tracking.component';
 
-
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -22,14 +21,8 @@ import { PumpingTrackingComponent } from './pages/dashboard/content/pumping-trac
     SleepDetailsDialogComponent,
     SolidsTrackingComponent,
     DiaperTrackingComponent,
-    PumpingTrackingComponent,
+    PumpingTrackingComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BabyTrackingRoutingModule,
-    IonicModule
-  ]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, BabyTrackingRoutingModule, IonicModule]
 })
-export class BabyTrackingModule { }
+export class BabyTrackingModule {}

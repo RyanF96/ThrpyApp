@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { SettingsService } from 'src/app/services/settings.service';
 import { AddChildDialogComponent } from './add-child-dialog/add-child-dialog.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +16,13 @@ import { AddChildDialogComponent } from './add-child-dialog/add-child-dialog.com
 export class SettingsComponent implements OnInit {
   children: IChild[] | undefined;
   userId: string | undefined;
-  constructor(private authService: AuthService, private dataService: DataService, private modalController: ModalController, private settingsService: SettingsService) {}
+  constructor(
+    private location: Location,
+    private authService: AuthService,
+    private dataService: DataService,
+    private modalController: ModalController,
+    private settingsService: SettingsService
+  ) {}
 
   get selectedChildId(): string | undefined {
     const settings = localStorage.getItem('settings');
@@ -61,6 +68,10 @@ export class SettingsComponent implements OnInit {
     this.settingsService.saveSetting(setting).subscribe((res) => {
       //TODO?
     });
+  }
+
+  back() {
+    this.location.back();
   }
 
   logout() {

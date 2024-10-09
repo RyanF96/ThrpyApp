@@ -19,8 +19,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { AddChildDialogComponent } from './settings/add-child-dialog/add-child-dialog.component';
 import { GetToKnowComponent } from './get-to-know/get-to-know.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent],
+  declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

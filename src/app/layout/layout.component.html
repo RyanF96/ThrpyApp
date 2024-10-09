@@ -1,7 +1,7 @@
 <router-outlet name="layout"></router-outlet>
-<ion-tabs>
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="thrpy">
+<ion-tabs color="secondary">
+  <ion-tab-bar style="height: 10vh" slot="bottom" color="secondary">
+    <ion-tab-button (click)="navigate('toolbar/tracking')" tab="tracking">
       <ion-icon name="play-circle"></ion-icon>
       Baby Tracking
     </ion-tab-button>

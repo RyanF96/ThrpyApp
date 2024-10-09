@@ -19,7 +19,11 @@ export class AuthService {
     this.userLoggedIn = loggedIn;
   }
 
-  constructor(private dataService: DataService, private router: Router, private auth: Auth) {}
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private auth: Auth
+  ) {}
 
   register(user: IUserIn) {
     this.dataService.register(user).pipe(
@@ -44,7 +48,7 @@ export class AuthService {
   setUserContext(userId: string) {
     this.setUserStatus = true;
     localStorage.setItem('userId', userId);
-    this.router.navigateByUrl('/thrpy');
+    this.router.navigateByUrl('/toolbar');
   }
 
   logout(): void {

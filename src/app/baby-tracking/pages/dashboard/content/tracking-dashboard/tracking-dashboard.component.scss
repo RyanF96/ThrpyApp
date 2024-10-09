@@ -1,0 +1,57 @@
+//   .header-container {
+//     background-color: #a6a998;
+//     height: 20vh;
+//     padding-top: 10px;
+//     border-radius: 0 0 5px 5px;
+//     border-bottom: 1px solid #898979;
+//   }
+
+//   .profile-row {
+//   }
+
+.contents-row {
+  height: 73vh;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  width: 90vw;
+  height: 15vw;
+  background-color: #e32245;
+  border-radius: 22px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  border: 1px solid rgb(171, 162, 141);
+}
+
+ion-col {
+  display: flex;
+
+  align-items: center;
+  color: white;
+}
+
+//   .profile-col {
+//     justify-content: start;
+//   }
+
+//   .icon-col {
+//     justify-content: center;
+//   }
+
+//   .settings-col {
+//     justify-content: end;
+//   }
+
+//   .icon {
+//     font-size: 28px;
+//     margin-right: 5px;
+//     color: white;
+//   }

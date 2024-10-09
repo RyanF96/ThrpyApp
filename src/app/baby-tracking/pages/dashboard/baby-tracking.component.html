@@ -1,0 +1,23 @@
+<div class="container">
+  <ion-toolbar color="primary" class="border-b border-[#898979]">
+    <ion-row class="h-[10vh]">
+      <ion-col class="flex justify-start h-[10vh] items-center" size="4">
+        <ion-button (click)="navigate('settings')">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="flex justify-center items-center h-[10vh]" size="4"
+        ><ion-button (click)="navigate('toolbar')" class="w-full h-full flex items-center justify-center overflow-hidden"
+          ><ion-img src="assets/Logo_Header_Icon.png" alt="Grow" class="w-full h-full object-contain"></ion-img></ion-button
+      ></ion-col>
+      <ion-col class="flex justify-end h-[10vh] items-center" size="4">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        profile
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+  <ion-content fullscreen>
+    <router-outlet></router-outlet>
+  </ion-content>
+</div>

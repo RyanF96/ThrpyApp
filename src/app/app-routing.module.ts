@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LayoutComponent } from './layout/layout.component';
 import { GetToKnowComponent } from './get-to-know/get-to-know.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,14 +13,16 @@ const routes: Routes = [
   { path: 'get-to-know', component: GetToKnowComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'settings', component: SettingsComponent },
+
   {
-    path: 'thrpy',
+    path: 'toolbar',
     component: LayoutComponent,
+
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'tracking'
+        component: DashboardComponent
       },
       {
         path: 'tracking',

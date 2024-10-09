@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content fullscreen>
   <div class="container">
     <div class="header">
       <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
@@ -24,7 +24,7 @@
               <u>Set time</u>
             </ion-col>
             <ion-col *ngIf="getFormControl('startTime')">
-              <u>{{ getFormControl('startTime') | date : 'shortTime' }}</u>
+              <u>{{ getFormControl('startTime') | date: 'shortTime' }}</u>
             </ion-col>
           </ion-button>
           <ion-popover trigger="startDate" size="cover">

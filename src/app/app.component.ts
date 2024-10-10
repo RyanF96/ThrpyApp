@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from './login/login.component';
 import { register } from 'swiper/element/bundle';
+import { LoginComponent } from './standalone/login/login.component';
 register();
 
 @Component({

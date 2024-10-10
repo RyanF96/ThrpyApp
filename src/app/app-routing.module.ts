@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+
 import { SignUpComponent } from './standalone/sign-up/sign-up.component';
-import { SettingsComponent } from './settings/settings.component';
-import { LayoutComponent } from './layout/layout.component';
-import { GetToKnowComponent } from './get-to-know/get-to-know.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './standalone/login/login.component';
+import { GetToKnowComponent } from './standalone/get-to-know/get-to-know.component';
+import { SettingsComponent } from './standalone/settings/settings.component';
+import { LayoutComponent } from './standalone/layout/layout.component';
+import { DashboardComponent } from './standalone/dashboard/dashboard.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

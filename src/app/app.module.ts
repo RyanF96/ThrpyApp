@@ -27,18 +27,11 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
   declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent, DashboardComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    IonicModule.forRoot(),
-    ReactiveFormsModule,
-    FormsModule,
-    BabyTrackingModule,
+  imports: [BrowserModule, AppRoutingModule, IonicModule.forRoot(), ReactiveFormsModule, FormsModule, BabyTrackingModule],
+  providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth())
-  ],
-  providers: [
+    provideAuth(() => getAuth()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

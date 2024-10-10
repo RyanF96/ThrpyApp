@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -20,28 +20,22 @@ import { AddChildDialogComponent } from './settings/add-child-dialog/add-child-d
 import { GetToKnowComponent } from './get-to-know/get-to-know.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
-@NgModule({
-  declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent, DashboardComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    IonicModule.forRoot(),
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    BabyTrackingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth())
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    }
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent, DashboardComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        IonicModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule,
+        BabyTrackingModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        provideAuth(() => getAuth())], providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}

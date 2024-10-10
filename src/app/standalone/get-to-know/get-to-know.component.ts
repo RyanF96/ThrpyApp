@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import Swiper from 'swiper';
 
@@ -8,10 +8,15 @@ import Swiper from 'swiper';
   styleUrls: ['./get-to-know.component.scss']
 })
 export class GetToKnowComponent implements OnDestroy {
+  private router = inject(Router);
+
   @ViewChild('swiper') swiperContainer: any;
   swiper: Swiper | undefined;
 
-  constructor(private router: Router) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   swiperInit(event: any) {
     this.swiper = event.detail[0];

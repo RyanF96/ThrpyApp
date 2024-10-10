@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TimerBase } from '../timer-base/timer-base';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IFood } from 'src/app/data/contracts';
@@ -11,11 +11,16 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./food-tracking.component.scss']
 })
 export class FoodTrackingComponent extends TimerBase implements OnInit {
+  private commonService = inject(CommonService);
+
   selectedSegment = 'nursing';
   foodForm!: FormGroup;
   foodTypes: string[] = ['Breast Milk', 'Formula', 'Tube Feeding', 'Cow Milk', 'Goat Milk', 'Soy Milk', 'Other'];
 
-  constructor(private commonService: CommonService) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     super();
   }
 

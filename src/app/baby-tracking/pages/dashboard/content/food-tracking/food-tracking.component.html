@@ -19,12 +19,16 @@
       <ion-row class="sleep-time">
         <ion-button id="startDate">
           <ion-col> Start time: </ion-col>
-          <ion-col *ngIf="!startDate">
-            <u>Set time</u>
-          </ion-col>
-          <ion-col *ngIf="startDate">
-            <u>{{ startDate | date: 'shortTime' }}</u>
-          </ion-col>
+          @if (!startDate) {
+            <ion-col>
+              <u>Set time</u>
+            </ion-col>
+          }
+          @if (startDate) {
+            <ion-col>
+              <u>{{ startDate | date: 'shortTime' }}</u>
+            </ion-col>
+          }
         </ion-button>
         <ion-popover trigger="startDate" size="cover">
           <ng-template>
@@ -35,12 +39,16 @@
       <ion-row class="sleep-time">
         <ion-button id="endDate">
           <ion-col> End Time: </ion-col>
-          <ion-col *ngIf="!endDate">
-            <u>Set time</u>
-          </ion-col>
-          <ion-col *ngIf="endDate">
-            <u>{{ endDate | date: 'shortTime' }}</u>
-          </ion-col>
+          @if (!endDate) {
+            <ion-col>
+              <u>Set time</u>
+            </ion-col>
+          }
+          @if (endDate) {
+            <ion-col>
+              <u>{{ endDate | date: 'shortTime' }}</u>
+            </ion-col>
+          }
         </ion-button>
         <ion-popover trigger="endDate" size="cover">
           <ng-template>
@@ -50,44 +58,50 @@
               pickerFormat="MMM DD, YYYY HH:mm"
               presentation="time"
               locale="sl-SI"
-              (ngModelChange)="manualTimeEntry()"></ion-datetime>
+            (ngModelChange)="manualTimeEntry()"></ion-datetime>
           </ng-template>
         </ion-popover>
       </ion-row>
-      <ng-container *ngIf="selectedSegment === 'nursing'">
-        <ion-row class="timer sleep-time" *ngIf="seconds || minutes || hours">
-          <div class="times">
-            <p>{{ formattedTime }}</p>
-          </div>
-        </ion-row>
+      @if (selectedSegment === 'nursing') {
+        @if (seconds || minutes || hours) {
+          <ion-row class="timer sleep-time">
+            <div class="times">
+              <p>{{ formattedTime }}</p>
+            </div>
+          </ion-row>
+        }
         <ion-row class="sleep-button-row">
           <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
         </ion-row>
-        <ion-row *ngIf="state === 2">
-          <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
-        </ion-row>
-      </ng-container>
-      <ng-container *ngIf="selectedSegment === 'bottle'">
-        <Form [formGroup]="foodForm">
-          <ion-list>
-            <ion-item>
-              <ion-select interface="popover" placeholder="Select Type" formControlName="foodType">
-                <ion-select-option [value]="food" *ngFor="let food of foodTypes" value="apples">{{ food }}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>
-          <ion-row class="input-row">
-            <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
+        @if (state === 2) {
+          <ion-row>
+            <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
           </ion-row>
-        </Form>
-      </ng-container>
-    </div>
-    <div class="save">
-      <div class="save-inner-container">
-        <ion-row class="sleep-time">
-          <ion-button (click)="save()"> Save </ion-button>
+        }
+      }
+      @if (selectedSegment === 'bottle') {
+        <Form [formGroup]="foodForm">
+        <ion-list>
+          <ion-item>
+            <ion-select interface="popover" placeholder="Select Type" formControlName="foodType">
+              @for (food of foodTypes; track food) {
+                <ion-select-option [value]="food" value="apples">{{ food }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-row class="input-row">
+          <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
         </ion-row>
-      </div>
+      </Form>
+    }
+  </div>
+  <div class="save">
+    <div class="save-inner-container">
+      <ion-row class="sleep-time">
+        <ion-button (click)="save()"> Save </ion-button>
+      </ion-row>
     </div>
   </div>
+</div>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,6 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private authService = inject(AuthService);
+  private auth = inject(Auth);
+
   loginForm!: FormGroup;
   email!: FormControl;
   password!: FormControl;
@@ -17,7 +20,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   isUserLoggedIn = false;
   componentDestroyed$ = new Subject();
 
-  constructor(private authService: AuthService, private auth: Auth) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     this.createFormControls();

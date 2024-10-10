@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -9,6 +9,10 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class AuthService {
+  private dataService = inject(DataService);
+  private router = inject(Router);
+  private auth = inject(Auth);
+
   userLoggedIn = false;
 
   get isUserLoggedIn() {
@@ -19,11 +23,10 @@ export class AuthService {
     this.userLoggedIn = loggedIn;
   }
 
-  constructor(
-    private dataService: DataService,
-    private router: Router,
-    private auth: Auth
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   register(user: IUserIn) {
     this.dataService.register(user).pipe(

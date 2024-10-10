@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ISleep, ISleepDetails } from 'src/app/data/contracts';
 import { SettingsEnum } from 'src/app/data/enums';
 import { DataService } from 'src/app/services/data.service';
@@ -13,13 +13,20 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./sleep-tracking.component.scss']
 })
 export class SleepTrackingComponent extends TimerBase implements OnInit {
+  private dataService = inject(DataService);
+  private commonService = inject(CommonService);
+  private modalController = inject(ModalController);
+
   sleepDetails: ISleepDetails | undefined | null;
   @ViewChild('startTimePopover') startTimePopover: any;
   startIsOpen = false;
   @ViewChild('endTimePopover') endTimePopover: any;
   endIsOpen = false;
 
-  constructor(private dataService: DataService, private commonService: CommonService, private modalController: ModalController) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     super();
   }
 

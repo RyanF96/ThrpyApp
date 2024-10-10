@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
@@ -12,6 +12,9 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./diaper-tracking.component.scss']
 })
 export class DiaperTrackingComponent implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private toastController = inject(ToastController);
+
   componentDestroyed$ = new Subject();
   selectedSegment = 'diaper';
   diaperForm!: FormGroup;
@@ -20,7 +23,10 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
   pottyDetails = ['Sat but dry', 'Potty', 'Accident'];
   diaper = 'diaper';
 
-  constructor(private dataService: DataService, private toastController: ToastController) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.createForm();

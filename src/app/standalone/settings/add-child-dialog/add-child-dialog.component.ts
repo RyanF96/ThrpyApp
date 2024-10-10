@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
@@ -8,9 +8,14 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./add-child-dialog.component.scss']
 })
 export class AddChildDialogComponent implements OnInit {
+  private modalController = inject(ModalController);
+
   childForm!: FormGroup;
 
-  constructor(private modalController: ModalController) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     this.createForm();

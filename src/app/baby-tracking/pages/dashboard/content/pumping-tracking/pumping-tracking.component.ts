@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,11 +13,17 @@ import { TimerBase } from '../timer-base/timer-base';
   styleUrls: ['./pumping-tracking.component.scss']
 })
 export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private toastController = inject(ToastController);
+
   selectedSegment = 'pumping';
   pumpingForm!: FormGroup;
   componentDestroyed$ = new Subject();
 
-  constructor(private dataService: DataService, private toastController: ToastController) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     super();
   }
 

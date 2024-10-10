@@ -12,24 +12,38 @@
       <div class="form-container">
         <ion-row class="input-row">
           <ion-input placeholder="Username" formControlName="username"></ion-input>
-          <div class="alert" *ngIf="username.hasError('required') && (username.dirty || username.touched)">Please enter a valid username.</div>
+          @if (username.hasError('required') && (username.dirty || username.touched)) {
+            <div class="alert">Please enter a valid username.</div>
+          }
         </ion-row>
         <ion-row class="input-row">
           <ion-input placeholder="Email Address" formControlName="email"></ion-input>
-          <div class="alert" *ngIf="email.hasError('email') && (email.dirty || email.touched)">Please enter a valid email address.</div>
-          <div class="alert" *ngIf="email.hasError('emailExists') && (email.dirty || email.touched)">Email already exists.</div>
+          @if (email.hasError('email') && (email.dirty || email.touched)) {
+            <div class="alert">Please enter a valid email address.</div>
+          }
+          @if (email.hasError('emailExists') && (email.dirty || email.touched)) {
+            <div class="alert">Email already exists.</div>
+          }
         </ion-row>
         <ion-row class="input-row">
           <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
-          <div class="alert" *ngIf="password.hasError('required') && (password.dirty || password.touched)">Password is required.</div>
-          <div class="alert" *ngIf="password.hasError('minlength') && (password.dirty || password.touched)">Password must be at least 8 characters long.</div>
-          <div class="alert" *ngIf="password.hasError('pattern') && (password.dirty || password.touched)">
-            Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.
-          </div>
+          @if (password.hasError('required') && (password.dirty || password.touched)) {
+            <div class="alert">Password is required.</div>
+          }
+          @if (password.hasError('minlength') && (password.dirty || password.touched)) {
+            <div class="alert">Password must be at least 8 characters long.</div>
+          }
+          @if (password.hasError('pattern') && (password.dirty || password.touched)) {
+            <div class="alert">
+              Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.
+            </div>
+          }
         </ion-row>
         <ion-row class="input-row">
           <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
-          <div class="alert" *ngIf="!checkPassword() && (confirmPassword.dirty || confirmPassword.touched)">Passwords do not match.</div>
+          @if (!checkPassword() && (confirmPassword.dirty || confirmPassword.touched)) {
+            <div class="alert">Passwords do not match.</div>
+          }
         </ion-row>
 
         <div class="actions-container">
@@ -71,9 +85,9 @@
   </ion-toolbar>
 </ion-footer>
 <!-- <ion-footer>
-  <ion-toolbar>
-    <ion-row>
-      <ion-col class="footer-container"> By signing up, you agree to our Terms of Service & Privacy Policy </ion-col>
-    </ion-row>
-  </ion-toolbar>
+<ion-toolbar>
+  <ion-row>
+    <ion-col class="footer-container"> By signing up, you agree to our Terms of Service & Privacy Policy </ion-col>
+  </ion-row>
+</ion-toolbar>
 </ion-footer> -->

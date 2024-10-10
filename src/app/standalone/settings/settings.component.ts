@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IChild, ISetting } from 'src/app/data/contracts';
 import { SettingsEnum } from 'src/app/data/enums';
@@ -14,15 +14,18 @@ import { Location } from '@angular/common';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
+  private location = inject(Location);
+  private authService = inject(AuthService);
+  private dataService = inject(DataService);
+  private modalController = inject(ModalController);
+  private settingsService = inject(SettingsService);
+
   children: IChild[] | undefined;
   userId: string | undefined;
-  constructor(
-    private location: Location,
-    private authService: AuthService,
-    private dataService: DataService,
-    private modalController: ModalController,
-    private settingsService: SettingsService
-  ) {}
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+  constructor() {}
 
   get selectedChildId(): string | undefined {
     const settings = localStorage.getItem('settings');

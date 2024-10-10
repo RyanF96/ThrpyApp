@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SettingsService } from 'src/app/services/settings.service';
 
@@ -8,10 +8,13 @@ import { SettingsService } from 'src/app/services/settings.service';
   styleUrls: ['./baby-tracking.component.scss']
 })
 export class BabyTrackingComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private settingsService: SettingsService
-  ) {}
+  private router = inject(Router);
+  private settingsService = inject(SettingsService);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.getSettings();

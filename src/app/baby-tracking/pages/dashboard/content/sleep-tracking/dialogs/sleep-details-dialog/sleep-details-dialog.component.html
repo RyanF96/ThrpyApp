@@ -8,21 +8,27 @@
     <ion-row>
       <ion-item>
         <ion-select label="Start of sleep" [multiple]="true" formControlName="sleepStartIds">
-          <ion-select-option *ngFor="let sleepDetail of startSleepDetails" [value]="sleepDetail.id">{{ sleepDetail.description }}</ion-select-option>
+          @for (sleepDetail of startSleepDetails; track sleepDetail) {
+            <ion-select-option [value]="sleepDetail.id">{{ sleepDetail.description }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
     </ion-row>
     <ion-row>
       <ion-item>
         <ion-select label="How it happened" [multiple]="true" formControlName="howItHappenedIds">
-          <ion-select-option *ngFor="let how of howItHappened" [value]="how.id">{{ how.description }}</ion-select-option>
+          @for (how of howItHappened; track how) {
+            <ion-select-option [value]="how.id">{{ how.description }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
     </ion-row>
     <ion-row>
       <ion-item>
         <ion-select label="End of sleep" [multiple]="true" formControlName="endOfSleepIds">
-          <ion-select-option *ngFor="let end of endOfSleep" [value]="end.id">{{ end.description }}</ion-select-option>
+          @for (end of endOfSleep; track end) {
+            <ion-select-option [value]="end.id">{{ end.description }}</ion-select-option>
+          }
         </ion-select>
       </ion-item>
     </ion-row>

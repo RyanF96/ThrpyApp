@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Constants } from '../config/constants';
 import { IChild, IDiaperDetails, IFood, IPumping, ISetting, ISleep, ISleepDetailOptions, ISolids, IUserIn } from '../data/contracts';
 
@@ -7,7 +7,13 @@ import { IChild, IDiaperDetails, IFood, IPumping, ISetting, ISleep, ISleepDetail
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient, private constants: Constants) {}
+  private http = inject(HttpClient);
+  private constants = inject(Constants);
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   // USERS
   public register(user: IUserIn) {

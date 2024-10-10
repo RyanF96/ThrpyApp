@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
@@ -13,6 +13,10 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private router = inject(Router);
+  private auth = inject(Auth);
+
   registerForm!: FormGroup;
   username!: FormControl;
   email!: FormControl;
@@ -20,11 +24,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
   confirmPassword!: FormControl;
   componentDestroyed$ = new Subject();
 
-  constructor(
-    private dataService: DataService,
-    private router: Router,
-    private auth: Auth
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         console.log('Navigation ended:', event.urlAfterRedirects);

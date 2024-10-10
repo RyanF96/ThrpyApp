@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, forkJoin, takeUntil } from 'rxjs';
@@ -12,13 +12,19 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./solids-tracking.component.scss']
 })
 export class SolidsTrackingComponent implements OnInit, OnDestroy {
+  private commonService = inject(CommonService);
+  private toastController = inject(ToastController);
+
   componentDestroyed$ = new Subject();
   startDate: Date | undefined;
   foodItems: IDetails[] = [];
   reactions: IDetails[] = [];
   solidsForm!: FormGroup;
 
-  constructor(private commonService: CommonService, private toastController: ToastController) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.createForm();

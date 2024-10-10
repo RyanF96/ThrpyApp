@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,11 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./tracking-dashboard.component.scss']
 })
 export class TrackingDashboardComponent implements OnInit {
+  private router = inject(Router);
+
   itemList: any[] = [];
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
   /**
    *
    */
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.itemList.push(

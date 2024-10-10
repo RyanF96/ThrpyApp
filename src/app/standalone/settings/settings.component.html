@@ -13,13 +13,15 @@
       </ion-row>
       <ion-row class="sub-heading"> Children </ion-row>
       <ion-row>
-        <div *ngFor="let child of children" [ngClass]="{ selected: child.id === selectedChildId }" class="edit-account">
-          <ion-button (click)="setSelectedChild(child)">
-            <ion-col>
-              {{ child.name }}
-            </ion-col>
-          </ion-button>
-        </div>
+        @for (child of children; track child) {
+          <div [ngClass]="{ selected: child.id === selectedChildId }" class="edit-account">
+            <ion-button (click)="setSelectedChild(child)">
+              <ion-col>
+                {{ child.name }}
+              </ion-col>
+            </ion-button>
+          </div>
+        }
         <div class="flex-center" (click)="addChild()">+ Add child</div>
       </ion-row>
       <div class="logout">

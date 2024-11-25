@@ -1,0 +1,99 @@
+<ion-content class="ion-padding">
+  <div class="child-info-container">
+    <div class="header-container">
+      <div class="header-image-container">
+        <ion-img class="header-image" src="assets/Join_Header_Img.png" alt="Sign Up Image"></ion-img>
+      </div>
+      <div>
+        <h1 class="sign-up-header">tell us about your child</h1>
+      </div>
+    </div>
+    <div class="profile-image-row">
+      <ion-row>
+        <div class="profile-image-container" (click)="triggerFileInput()" style="cursor: pointer">
+          <ion-img *ngIf="!selectedProfileImage" [src]="defaultProfileImage" alt="Camera Icon" class="default-profile-image"></ion-img>
+          <ion-img *ngIf="selectedProfileImage" [src]="selectedProfileImage" alt="Selected image" class="selected-profile-image"></ion-img>
+          <input id="fileInput" type="file" accept="image/*" (change)="onProfileImageSelected($event)" style="display: none" />
+        </div>
+      </ion-row>
+    </div>
+    <form [formGroup]="childInfoForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <ion-row class="input-row">
+          <ion-segment formControlName="gender" value="default">
+            <ion-segment-button value="female">
+              <div class="inner-segment-container">
+                <ion-icon src="assets/Girl_Transparent_Icon.svg" alt="girl image-icon"></ion-icon>
+                <ion-label>girl</ion-label>
+              </div>
+            </ion-segment-button>
+            <ion-segment-button value="male">
+              <div class="inner-segment-container">
+                <ion-icon src="assets/Boy_Transparent_Icon.svg" alt="boy image-icon"></ion-icon>
+                <ion-label>boy</ion-label>
+              </div>
+            </ion-segment-button>
+          </ion-segment>
+        </ion-row>
+
+        <ion-row class="input-row">
+          <ion-input formControlName="firstName" placeholder="First name or nickname"></ion-input>
+        </ion-row>
+
+        <ion-row class="input-row">
+          <div class="birth-date-container">
+            <ion-label>Date of birth:</ion-label>
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime
+                  id="datetime"
+                  presentation="date-time"
+                  formControlName="dateOfBirth"
+                  [formatOptions]="{
+                    date: {
+                      weekday: 'short',
+                      month: 'long',
+                      day: '2-digit'
+                    },
+                    time: {
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    }
+                  }">
+                </ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </div>
+        </ion-row>
+
+        <ion-row class="input-row">
+          <div class="born-checkbox-group">
+            <label>Baby born prematurely:</label>
+            <ion-checkbox formControlName="premature"></ion-checkbox>
+          </div>
+        </ion-row>
+
+        <ion-row class="input-row">
+          <div class="child-list-group">
+            <ion-list>
+              <ion-select label="I am the child's:" formControlName="childRelation" (ionChange)="onSelectChildRelationChange($event)">
+                <ion-select-option *ngIf="hasRelationSelection" value="">Clear</ion-select-option>
+                <ion-select-option value="father">Father</ion-select-option>
+                <ion-select-option value="mother">Mother</ion-select-option>
+                <ion-select-option value="aunt">Aunt</ion-select-option>
+                <ion-select-option value="uncle">Uncle</ion-select-option>
+              </ion-select>
+            </ion-list>
+          </div>
+        </ion-row>
+
+        <div class="actions-container">
+          <ion-row class="button-row">
+            <ion-button class="sign-button" type="submit" [disabled]="!childInfoForm.valid">Next</ion-button>
+          </ion-row>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>

@@ -1,155 +1,140 @@
-<ion-content fullscreen>
-  <div class="container">
-    <div class="header">
-      <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
-      <div>Add Pumping</div>
-    </div>
-    <hr />
-    <div>
-      <ion-toolbar>
-        <ion-segment value="pumping" (ionChange)="segmentChanged($event)">
-          <ion-segment-button value="pumping">
-            <ion-label>Pumping</ion-label>
+<div class="pumping-container">
+  <ion-row class="header">
+    <ion-col class="flex justify-start items-center" size="3"> <ion-icon class="back-icon" routerLink="toolbar/tracking/dashboard" name="chevron-back-outline"></ion-icon></ion-col>
+    <ion-col class="flex justify-start items-center" size="6"> <span class="header-text">Add Pumping</span></ion-col>
+    <ion-col class="flex justify-start items-center" size="3">
+      @if (pumpingFormValid) {
+        <div class="save">
+          <ion-row>
+            <ion-button (click)="save()"> Save </ion-button>
+          </ion-row>
+        </div>
+      }
+    </ion-col>
+  </ion-row>
+  <hr />
+  <div>
+    <ion-toolbar>
+      <ion-segment value="pumping" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="pumping">
+          <ion-label>Pumping</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="details">
+          <ion-label>Details</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <ion-row class="pump-time">
+      <ion-button id="startDate">
+        <ion-col> <span class="header-text"> Start time: </span> </ion-col>
+        @if (!startDate) {
+          <ion-col>
+            <u class="header-text">Set time</u>
+          </ion-col>
+        }
+        @if (startDate) {
+          <ion-col>
+            <u>{{ startDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover trigger="startDate" size="cover">
+        <ng-template>
+          <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    <ion-row class="pump-time">
+      <ion-button id="endDate">
+        <ion-col> <span class="header-text"> End Time: </span></ion-col>
+        @if (!endDate) {
+          <ion-col>
+            <u class="header-text">Set time</u>
+          </ion-col>
+        }
+        @if (endDate) {
+          <ion-col>
+            <u>{{ endDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover trigger="endDate" size="cover">
+        <ng-template>
+          <ion-datetime
+            [(ngModel)]="endDate"
+            displayFormat="MMM DD, YYYY HH:mm"
+            pickerFormat="MMM DD, YYYY HH:mm"
+            presentation="time"
+            locale="sl-SI"
+            (ngModelChange)="manualTimeEntry()"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    @if (selectedSegment === 'pumping') {
+      @if (seconds || minutes || hours) {
+        <ion-row class="timer-container">
+          <div class="time">
+            <p>{{ formattedTime }}</p>
+          </div>
+        </ion-row>
+      }
+      <ion-row class="pump-button-row">
+        <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
+      </ion-row>
+      @if (state === 2) {
+        <ion-row class="pump-details-container">
+          <ion-col (click)="reset()">
+            <ion-button fill="outline"> Reset </ion-button>
+          </ion-col>
+          <ion-col (click)="segmentChanged('details')">
+            <ion-button fill="outline"> Details </ion-button>
+          </ion-col>
+        </ion-row>
+      }
+    }
+    @if (selectedSegment === 'details') {
+      <hr />
+      <form class="form-container" [formGroup]="pumpingForm">
+        <ion-segment class="total-segment-container" formControlName="leftRight">
+          <ion-segment-button [value]="false">
+            <ion-label>Total</ion-label>
           </ion-segment-button>
-          <ion-segment-button value="details">
-            <ion-label>Details</ion-label>
+          <ion-segment-button [value]="true">
+            <ion-label>Left/Right</ion-label>
           </ion-segment-button>
         </ion-segment>
-      </ion-toolbar>
-      <ion-row class="sleep-time">
-        <ion-button id="startDate">
-          <ion-col> Start time: </ion-col>
-          @if (!startDate) {
-            <ion-col>
-              <u>Set time</u>
-            </ion-col>
-          }
-          @if (startDate) {
-            <ion-col>
-              <u>{{ startDate | date : 'shortTime' }}</u>
-            </ion-col>
-          }
-        </ion-button>
-        <ion-popover trigger="startDate" size="cover">
-          <ng-template>
-            <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-row>
-      <ion-row class="sleep-time">
-        <ion-button id="endDate">
-          <ion-col> End Time: </ion-col>
-          @if (!endDate) {
-            <ion-col>
-              <u>Set time</u>
-            </ion-col>
-          }
-          @if (endDate) {
-            <ion-col>
-              <u>{{ endDate | date : 'shortTime' }}</u>
-            </ion-col>
-          }
-        </ion-button>
-        <ion-popover trigger="endDate" size="cover">
-          <ng-template>
-            <ion-datetime
-              [(ngModel)]="endDate"
-              displayFormat="MMM DD, YYYY HH:mm"
-              pickerFormat="MMM DD, YYYY HH:mm"
-              presentation="time"
-              locale="sl-SI"
-            (ngModelChange)="manualTimeEntry()"></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-row>
-      @if (selectedSegment === 'pumping') {
-        @if (seconds || minutes || hours) {
-          <ion-row class="timer sleep-time">
-            <div class="times">
-              <p>{{ formattedTime }}</p>
-            </div>
-          </ion-row>
-        }
-        <ion-row class="sleep-button-row">
-          <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
-        </ion-row>
-        @if (state === 2) {
-          <ion-row>
-            <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
-            <ion-col (click)="segmentChanged('details')" class="sleep-time">Details</ion-col>
-          </ion-row>
-        }
-      }
-      @if (selectedSegment === 'details') {
-        <Form [formGroup]="pumpingForm">
-        <ion-item>
-          <ion-segment style="margin-bottom: 0" formControlName="leftRight">
-            <ion-segment-button [value]="false">
-              <ion-label>Total</ion-label>
-            </ion-segment-button>
-            <ion-segment-button [value]="true">
-              <ion-label>Left/Right</ion-label>
-            </ion-segment-button>
-          </ion-segment>
-        </ion-item>
         @if (!getFormControlValue('leftRight')) {
-          <ion-item>
-            <ion-range aria-label=" Custom range" [min]="0" [max]="60" [pin]="true" [ticks]="true" [snaps]="true" labelPlacement="start" label="Total" formControlName="total">
-              <ion-label slot="start">0</ion-label>
-              <ion-label slot="end">60 ml</ion-label>
-            </ion-range>
-          </ion-item>
+          <ion-range aria-label=" Custom range" [min]="0" [max]="60" [pin]="true" [ticks]="true" [snaps]="true" labelPlacement="start" label="Total:" formControlName="total">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">60 ml</ion-label>
+          </ion-range>
         }
         @if (getFormControlValue('leftRight')) {
-          <ion-item>
-            <ion-range
-              (ionChange)="updateTotal()"
-              aria-label=" Custom range"
-              [min]="0"
-              [max]="30"
-              [pin]="true"
-              [ticks]="true"
-              [snaps]="true"
-              labelPlacement="start"
-              label="Left"
-              formControlName="left">
-              <ion-label slot="start">0</ion-label>
-              <ion-label slot="end">30 ml</ion-label>
-            </ion-range>
-          </ion-item>
+          <ion-range (ionChange)="updateTotal()" aria-label="Custom range" [min]="0" [max]="30" [pin]="true" [ticks]="true" [snaps]="true" labelPlacement="start" label="Left:" formControlName="left">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">30 ml</ion-label>
+          </ion-range>
         }
         @if (getFormControlValue('leftRight')) {
-          <ion-item>
-            <ion-range
-              (ionChange)="updateTotal()"
-              aria-label=" Custom range"
-              [min]="0"
-              [max]="30"
-              [pin]="true"
-              [ticks]="true"
-              [snaps]="true"
-              labelPlacement="start"
-              label="Right"
-              formControlName="right">
-              <ion-label slot="start">0</ion-label>
-              <ion-label slot="end">30 ml</ion-label>
-            </ion-range>
-          </ion-item>
+          <ion-range
+            (ionChange)="updateTotal()"
+            aria-label=" Custom range"
+            [min]="0"
+            [max]="30"
+            [pin]="true"
+            [ticks]="true"
+            [snaps]="true"
+            labelPlacement="start"
+            label="Right:"
+            formControlName="right">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">30 ml</ion-label>
+          </ion-range>
         }
-        <ion-row class="input-row">
-          <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
+        <ion-row class="notes-container">
+          <ion-textarea placeholder="Notes" formControlName="notes" autoGrow="true"> </ion-textarea>
         </ion-row>
-      </Form>
+      </form>
     }
   </div>
-  @if (pumpingFormValid) {
-    <div class="save">
-      <div class="save-inner-container">
-        <ion-row class="sleep-time">
-          <ion-button (click)="save()"> Save </ion-button>
-        </ion-row>
-      </div>
-    </div>
-  }
 </div>
-</ion-content>

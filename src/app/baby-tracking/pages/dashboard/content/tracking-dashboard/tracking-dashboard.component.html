@@ -1,12 +1,8 @@
-<ion-content fullscreen>
-  <ion-row class="contents-row">
-    <div>
-      @for (item of itemList; track item) {
-        <div class="item" (click)="navigate(item.url)">
-          <ion-icon [name]="item.icon"></ion-icon>
-          {{ item.name }}
-        </div>
-      }
-    </div>
+<div class="tracking-dashboard">
+  <ion-row *ngFor="let item of itemList; trackBy: trackItem" class="row-item-container" (click)="navigate(item.url)">
+    <ion-col class="icon-container" size="4">
+      <ion-icon [src]="item.src" alt="image-icon"></ion-icon>
+    </ion-col>
+    <ion-col class="item-name-container" size="7">{{ item.name }}</ion-col>
   </ion-row>
-</ion-content>
+</div>

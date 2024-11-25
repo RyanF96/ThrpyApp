@@ -11,24 +11,25 @@ export class TrackingDashboardComponent implements OnInit {
 
   itemList: any[] = [];
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
-  /**
-   *
-   */
+
   constructor() {}
 
   ngOnInit(): void {
     this.itemList.push(
-      { name: 'Sleep', icon: 'bed-outline', url: 'toolbar/tracking/sleep' },
-      { name: 'Feeding', icon: 'beer-outline', url: 'toolbar/tracking/food' },
-      { name: 'Solids', icon: 'pizza-outline', url: 'toolbar/tracking/solids' },
-      { name: 'Diaper/Potty', icon: 'sad-outline', url: 'toolbar/tracking/diaper' },
-      { name: 'Pumping', icon: 'breast-pump', url: 'toolbar/tracking/pumping' }
+      { name: 'Sleep', src: 'assets/Sleep_Icon.svg', url: 'sleep' },
+      { name: 'Feeding', src: 'assets/Feeding_Icon.svg', url: 'food' },
+      { name: 'Solids', src: 'assets/Spoon_Icon.svg', url: 'solids' },
+      { name: 'Diaper/Potty', src: 'assets/Diaper_Icon.svg', url: 'diaper' },
+      { name: 'Pumping', src: 'assets/Pacifier_Icon.svg', url: 'pumping' }
     );
   }
 
   navigate(path: string) {
     this.router.navigate([path]);
+  }
+
+  trackItem(item: any): any {
+    return item.id;
   }
 }

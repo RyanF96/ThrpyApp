@@ -1,0 +1,5 @@
+ion-tabs ion-tab-bar {
+  --background: rgba(170, 170, 170);
+  --color-selected: rgba(255, 0, 0);
+  --color: white;
+}

@@ -60,40 +60,45 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   createFirebaseUser() {
-    if (this.registerForm.valid !== true) {
-      return;
-    }
-    const userForm = this.registerForm.value as IUserIn;
-    createUserWithEmailAndPassword(this.auth, userForm.email, userForm.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        user
-          .getIdToken()
-          .then((accessToken) => {
-            localStorage.setItem('accessToken', accessToken);
-          })
-          .catch((error) => {
-            console.error('Error getting access token:', error);
-          });
-        const myUser = {
-          email: user.email,
-          username: userForm.username,
-          firebaseId: user.uid,
-          password: userForm.password
-        } as IUserIn;
-        this.dataService
-          .register(myUser)
-          .pipe(takeUntil(this.componentDestroyed$))
-          .subscribe((res) => {
-            if (res) {
-              this.router.navigateByUrl('/login');
-            }
-          });
-      })
-      .catch((error) => {
-        console.error('Registration error:', error.code + ':' + error.message);
-      });
-    this.registerForm.markAllAsTouched();
+    this.router.navigateByUrl('/sign-up-child-info');
+    // if (this.registerForm.valid !== true) {
+    //   return;
+    // }
+    // const userForm = this.registerForm.value as IUserIn;
+    // createUserWithEmailAndPassword(this.auth, userForm.email, userForm.password)
+    //   .then((userCredential) => {
+    //     const user = userCredential.user;
+    //     user
+    //       .getIdToken()
+    //       .then((accessToken) => {
+    //         localStorage.setItem('accessToken', accessToken);
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error getting access token:', error);
+    //       });
+
+    //     const myUser = {
+    //       email: user.email,
+    //       username: userForm.username,
+    //       firebaseId: user.uid,
+    //       password: userForm.password
+    //     } as IUserIn;
+
+    //     this.dataService
+    //       .register(myUser)
+    //       .pipe(takeUntil(this.componentDestroyed$))
+    //       .subscribe((res) => {
+    //         if (res) {
+    //           //Navigate to 'sign-up-child-info' route on successful registration only.
+    //           this.router.navigateByUrl('/sign-up-child-info');
+    //         }
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.error('Registration error:', error.code + ':' + error.message);
+    //   });
+
+    // this.registerForm.markAllAsTouched();
   }
 
   checkPassword(): boolean {

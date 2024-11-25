@@ -22,15 +22,13 @@
             <div class="alert">Password must be at least 8 characters long.</div>
           }
           @if (password.hasError('pattern') && (password.dirty || password.touched)) {
-            <div class="alert">
-              Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.
-            </div>
+            <div class="alert">Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.</div>
           }
         </ion-row>
       </div>
       <div class="actions-container">
         <ion-row>
-          <ion-button class="sign-button" (click)="SignIn()"> Sign in </ion-button>
+          <ion-button class="sign-button" (click)="signIn()"> Sign in </ion-button>
         </ion-row>
         <ion-row> Forgot Password? </ion-row>
 
@@ -52,9 +50,9 @@
           </ion-button>
         </ion-col>
       </ion-row> -->
-    </div>
-  </form>
-</div>
+      </div>
+    </form>
+  </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

@@ -5,15 +5,13 @@ import { provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule, IonicSlides } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BabyTrackingModule } from './baby-tracking/baby-tracking.module';
-
 import { SignUpComponent } from './standalone/sign-up/sign-up.component';
-
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LoginComponent } from './standalone/login/login.component';
 import { SettingsComponent } from './standalone/settings/settings.component';
@@ -22,9 +20,21 @@ import { AddChildDialogComponent } from './standalone/settings/add-child-dialog/
 import { GetToKnowComponent } from './standalone/get-to-know/get-to-know.component';
 import { DashboardComponent } from './standalone/dashboard/dashboard.component';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { SignUpChildInfoComponent } from './standalone/sign-up/sign-up-child-info/sign-up-child-info.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignUpComponent, GetToKnowComponent, SettingsComponent, LayoutComponent, AddChildDialogComponent, GetToKnowComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SignUpComponent,
+    GetToKnowComponent,
+    SettingsComponent,
+    LayoutComponent,
+    AddChildDialogComponent,
+    GetToKnowComponent,
+    DashboardComponent,
+    SignUpChildInfoComponent
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, IonicModule.forRoot(), ReactiveFormsModule, FormsModule, BabyTrackingModule],

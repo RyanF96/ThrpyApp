@@ -1,0 +1,171 @@
+.child-info-container {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
+
+  ion-content {
+    --background: white;
+  }
+
+  .header-container {
+    margin: 20px 20px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header-image-container {
+      margin-bottom: 10px;
+      .header-image {
+        width: 9vh;
+        height: 9vh;
+      }
+    }
+
+    .sign-up-header {
+      text-align: center;
+      margin: 0px !important;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  .profile-image-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .profile-image-container {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(170, 170, 170);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 10px;
+
+      .default-profile-image {
+        width: 50px;
+        height: 50px;
+      }
+
+      .selected-profile-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-row {
+      width: 100%;
+      margin: 10px 20px 10px 20px;
+
+      ion-input {
+        border-radius: 24px;
+        padding: 0 10px !important;
+        color: white;
+        border: none;
+        background-color: rgba(170, 170, 170);
+      }
+
+      ion-segment {
+        border-radius: 24px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+        border: none;
+        background-color: rgba(170, 170, 170);
+        height: 45px;
+
+        ion-segment-button {
+          .inner-segment-container {
+            display: flex;
+            align-items: center;
+            ion-icon {
+              font-size: 45px;
+              margin-right: 5px;
+            }
+            ion-label {
+              color: inherit;
+              font-weight: normal;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      ion-segment-button.segment-button-checked {
+        --border-radius: 24px;
+        --ion-background-color: red;
+      }
+
+      .birth-date-container {
+        padding-right: 10px;
+
+        ion-label {
+          padding-left: 10px;
+        }
+
+        ion-datetime-button::part(native) {
+          border-radius: 24px;
+          margin-left: 0px;
+          padding: 10px;
+          background-color: rgba(170, 170, 170);
+          color: #ffffff;
+        }
+      }
+
+      .born-checkbox-group {
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        align-items: center;
+
+        label {
+          margin-right: 10px;
+        }
+      }
+
+      .child-list-group {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 1.5px;
+      }
+
+      .child-list-group ion-select,
+      .child-list-group ion-select-option {
+        font-family: 'Poppins', sans-serif;
+        letter-spacing: 1.5px;
+      }
+    }
+
+    .alert {
+      margin: 0 20px 0 20px;
+      color: red;
+      font-size: 12px;
+    }
+  }
+
+  .actions-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .sign-button {
+      color: white;
+      font-family: 'poppins';
+      letter-spacing: 1.5px;
+      --background: rgba(227, 34, 69);
+      --border-radius: 24px;
+      width: 120px;
+      margin-bottom: 10px;
+    }
+  }
+}

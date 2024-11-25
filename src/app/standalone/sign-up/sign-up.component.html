@@ -34,9 +34,7 @@
             <div class="alert">Password must be at least 8 characters long.</div>
           }
           @if (password.hasError('pattern') && (password.dirty || password.touched)) {
-            <div class="alert">
-              Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.
-            </div>
+            <div class="alert">Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.</div>
           }
         </ion-row>
         <ion-row class="input-row">
@@ -46,9 +44,19 @@
           }
         </ion-row>
 
+        <div class="sub-confirmation-info-container">
+          <ion-row class="sub-header">
+            <h1>By creating an account you can</h1>
+          </ion-row>
+          <ion-row class="sub-header-text">
+            <p>Sync your baby's data accross your devices</p>
+            <p>Restore your data if you change your device</p>
+          </ion-row>
+        </div>
+
         <div class="actions-container">
           <ion-row class="button-row">
-            <ion-button class="sign-button" (click)="createFirebaseUser()"> Sign up </ion-button>
+            <ion-button class="sign-button" (click)="createFirebaseUser()"> Next </ion-button>
           </ion-row>
           <ion-row>
             <div class="policy-header">By signing up, you agree to our <a routerLink="">Terms of Service & Privacy Policy</a></div>
@@ -84,10 +92,3 @@
     </ion-row>
   </ion-toolbar>
 </ion-footer>
-<!-- <ion-footer>
-<ion-toolbar>
-  <ion-row>
-    <ion-col class="footer-container"> By signing up, you agree to our Terms of Service & Privacy Policy </ion-col>
-  </ion-row>
-</ion-toolbar>
-</ion-footer> -->

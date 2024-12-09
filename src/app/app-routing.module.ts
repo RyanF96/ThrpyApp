@@ -5,8 +5,8 @@ import { LoginComponent } from './standalone/login/login.component';
 import { GetToKnowComponent } from './standalone/get-to-know/get-to-know.component';
 import { SettingsComponent } from './standalone/settings/settings.component';
 import { LayoutComponent } from './standalone/layout/layout.component';
-import { DashboardComponent } from './standalone/dashboard/dashboard.component';
 import { SignUpChildInfoComponent } from './standalone/sign-up/sign-up-child-info/sign-up-child-info.component';
+import { LandingPageComponent } from './standalone/landing-page/landing-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,7 +22,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        component: DashboardComponent
+        component: LandingPageComponent
       },
       {
         path: 'tracking',

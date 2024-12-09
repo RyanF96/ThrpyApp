@@ -18,9 +18,9 @@ import { SettingsComponent } from './standalone/settings/settings.component';
 import { LayoutComponent } from './standalone/layout/layout.component';
 import { AddChildDialogComponent } from './standalone/settings/add-child-dialog/add-child-dialog.component';
 import { GetToKnowComponent } from './standalone/get-to-know/get-to-know.component';
-import { DashboardComponent } from './standalone/dashboard/dashboard.component';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { SignUpChildInfoComponent } from './standalone/sign-up/sign-up-child-info/sign-up-child-info.component';
+import { LandingPageComponent } from './standalone/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +32,8 @@ import { SignUpChildInfoComponent } from './standalone/sign-up/sign-up-child-inf
     LayoutComponent,
     AddChildDialogComponent,
     GetToKnowComponent,
-    DashboardComponent,
-    SignUpChildInfoComponent
+    SignUpChildInfoComponent,
+    LandingPageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],

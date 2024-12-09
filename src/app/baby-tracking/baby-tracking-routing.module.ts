@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: BabyTrackingComponent,
     children: [
-      { path: 'dashboard', component: TrackingDashboardComponent},
+      { path: 'dashboard', component: TrackingDashboardComponent },
       { path: 'sleep', component: SleepTrackingComponent },
       { path: 'food', component: FoodTrackingComponent },
       { path: 'solids', component: SolidsTrackingComponent },

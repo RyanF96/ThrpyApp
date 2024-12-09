@@ -1,25 +1,36 @@
-<ion-header>
-  <ion-toolbar color="primary" class="border-b border-[#898979]">
-    <ion-row class="h-[10vh]">
-      <ion-col class="settings flex justify-start h-[10vh] items-center" size="4">
-        <ion-button (click)="navigate('settings')">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col class="image-header flex justify-center items-center h-[10vh]" size="4">
-        <ion-button (click)="navigate('toolbar')" class="header-image flex items-center justify-center overflow-hidden">
-          <ion-img src="assets/ToolBar_Header_Img.png" alt="Grow" class="w-full h-full object-contain"></ion-img>
-        </ion-button>
-      </ion-col>
-      <ion-col class="profile flex justify-end h-[10vh] items-center" size="4">
-        <ion-button>
-          <ion-icon name="menu-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <router-outlet></router-outlet>
-</ion-content>
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ul>
+      <li (click)="navigate('settings')">Settings</li>
+    </ul>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar color="primary" class="border-b border-[#898979]">
+      <ion-row class="h-[10vh]">
+        <ion-col class="settings flex justify-start h-[10vh] items-center" size="4">
+          <ion-button (click)="navigate('toolbar')">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col class="image-header flex justify-center items-center h-[10vh]" size="4">
+          <ion-button (click)="navigate('toolbar')" class="header-image flex items-center justify-center overflow-hidden">
+            <ion-img src="assets/ToolBar_Header_Img.png" alt="Grow" class="w-full h-full object-contain"></ion-img>
+          </ion-button>
+        </ion-col>
+        <ion-col class="profile flex justify-end h-[10vh] items-center" size="4">
+          <ion-menu-button style="--color: white"></ion-menu-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <router-outlet></router-outlet>
+  </ion-content>
+</div>

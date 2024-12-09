@@ -1,86 +1,85 @@
-<ion-content fullscreen>
-  <div class="container">
-    <div class="header">
-      <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
-      <div>Add Feeding</div>
-    </div>
-    <hr />
-    <div>
-      <ion-toolbar>
-        <ion-segment value="all" (ionChange)="segmentChanged($event)">
-          <ion-segment-button value="nursing">
-            <ion-label>Nursing</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="bottle">
-            <ion-label>Details</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
-      <ion-row class="sleep-time">
-        <ion-button id="startDate">
-          <ion-col> Start time: </ion-col>
-          @if (!startDate) {
-            <ion-col>
-              <u>Set time</u>
-            </ion-col>
-          }
-          @if (startDate) {
-            <ion-col>
-              <u>{{ startDate | date: 'shortTime' }}</u>
-            </ion-col>
-          }
-        </ion-button>
-        <ion-popover trigger="startDate" size="cover">
-          <ng-template>
-            <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-row>
-      <ion-row class="sleep-time">
-        <ion-button id="endDate">
-          <ion-col> End Time: </ion-col>
-          @if (!endDate) {
-            <ion-col>
-              <u>Set time</u>
-            </ion-col>
-          }
-          @if (endDate) {
-            <ion-col>
-              <u>{{ endDate | date: 'shortTime' }}</u>
-            </ion-col>
-          }
-        </ion-button>
-        <ion-popover trigger="endDate" size="cover">
-          <ng-template>
-            <ion-datetime
-              [(ngModel)]="endDate"
-              displayFormat="MMM DD, YYYY HH:mm"
-              pickerFormat="MMM DD, YYYY HH:mm"
-              presentation="time"
-              locale="sl-SI"
+<div class="container">
+  <div class="header">
+    <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
+    <div>Add Feeding</div>
+  </div>
+  <hr />
+  <div>
+    <ion-toolbar>
+      <ion-segment value="all" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="nursing">
+          <ion-label>Nursing</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="bottle">
+          <ion-label>Details</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <ion-row class="sleep-time">
+      <ion-button id="startDate">
+        <ion-col> Start time: </ion-col>
+        @if (!startDate) {
+          <ion-col>
+            <u>Set time</u>
+          </ion-col>
+        }
+        @if (startDate) {
+          <ion-col>
+            <u>{{ startDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover trigger="startDate" size="cover">
+        <ng-template>
+          <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    <ion-row class="sleep-time">
+      <ion-button id="endDate">
+        <ion-col> End Time: </ion-col>
+        @if (!endDate) {
+          <ion-col>
+            <u>Set time</u>
+          </ion-col>
+        }
+        @if (endDate) {
+          <ion-col>
+            <u>{{ endDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover trigger="endDate" size="cover">
+        <ng-template>
+          <ion-datetime
+            [(ngModel)]="endDate"
+            displayFormat="MMM DD, YYYY HH:mm"
+            pickerFormat="MMM DD, YYYY HH:mm"
+            presentation="time"
+            locale="sl-SI"
             (ngModelChange)="manualTimeEntry()"></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-row>
-      @if (selectedSegment === 'nursing') {
-        @if (seconds || minutes || hours) {
-          <ion-row class="timer sleep-time">
-            <div class="times">
-              <p>{{ formattedTime }}</p>
-            </div>
-          </ion-row>
-        }
-        <ion-row class="sleep-button-row">
-          <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    @if (selectedSegment === 'nursing') {
+      @if (seconds || minutes || hours) {
+        <ion-row class="timer sleep-time">
+          <div class="times">
+            <p>{{ formattedTime }}</p>
+          </div>
         </ion-row>
-        @if (state === 2) {
-          <ion-row>
-            <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
-          </ion-row>
-        }
       }
-      @if (selectedSegment === 'bottle') {
-        <Form [formGroup]="foodForm">
+      <ion-row class="sleep-button-row">
+        <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
+      </ion-row>
+      @if (state === 2) {
+        <ion-row>
+          <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
+        </ion-row>
+      }
+    }
+    @if (selectedSegment === 'bottle') {
+      <Form [formGroup]="foodForm">
         <ion-list>
           <ion-item>
             <ion-select interface="popover" placeholder="Select Type" formControlName="foodType">
@@ -104,4 +103,3 @@
     </div>
   </div>
 </div>
-</ion-content>

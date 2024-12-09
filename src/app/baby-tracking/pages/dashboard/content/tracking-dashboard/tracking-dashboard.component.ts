@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tracking-dashboard',
@@ -8,11 +8,10 @@ import { Router } from '@angular/router';
 })
 export class TrackingDashboardComponent implements OnInit {
   private router = inject(Router);
-
   itemList: any[] = [];
 
-  constructor(...args: unknown[]);
-
+  // constructor(...args: unknown[]);
+  activatedRoute = inject(ActivatedRoute);
   constructor() {}
 
   ngOnInit(): void {
@@ -26,7 +25,8 @@ export class TrackingDashboardComponent implements OnInit {
   }
 
   navigate(path: string) {
-    this.router.navigate([path]);
+    console.log(this.activatedRoute.snapshot);
+    this.router.navigate([path], { relativeTo: this.activatedRoute.parent });
   }
 
   trackItem(item: any): any {

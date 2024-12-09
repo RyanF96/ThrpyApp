@@ -10,7 +10,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 export class BabyTrackingComponent implements OnInit {
   private router = inject(Router);
   private settingsService = inject(SettingsService);
-
+  menuType: string = 'overlay';
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 

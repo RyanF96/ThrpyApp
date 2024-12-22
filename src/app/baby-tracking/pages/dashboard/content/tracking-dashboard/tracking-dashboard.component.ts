@@ -10,15 +10,14 @@ export class TrackingDashboardComponent implements OnInit {
   private router = inject(Router);
   itemList: any[] = [];
 
-  // constructor(...args: unknown[]);
   activatedRoute = inject(ActivatedRoute);
   constructor() {}
 
   ngOnInit(): void {
     this.itemList.push(
-      { name: 'Sleep', src: 'assets/Sleep_Icon.svg', url: 'sleep' },
-      { name: 'Feeding', src: 'assets/Feeding_Icon.svg', url: 'food' },
-      { name: 'Solids', src: 'assets/Spoon_Icon.svg', url: 'solids' },
+      { name: 'Sleep', src: 'assets/Crib_Icon.svg', url: 'sleep' },
+      { name: 'Feeding', src: 'assets/Bottle_Icon.svg', url: 'food' },
+      { name: 'Solids', src: 'assets/Bip_Icon.svg', url: 'solids' },
       { name: 'Diaper/Potty', src: 'assets/Diaper_Icon.svg', url: 'diaper' },
       { name: 'Pumping', src: 'assets/Pacifier_Icon.svg', url: 'pumping' }
     );

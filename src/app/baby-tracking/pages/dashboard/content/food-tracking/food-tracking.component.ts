@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { TimerBase } from '../timer-base/timer-base';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IFood } from 'src/app/data/contracts';
@@ -17,7 +17,9 @@ export class FoodTrackingComponent extends TimerBase implements OnInit {
   foodForm!: FormGroup;
   foodTypes: string[] = ['Breast Milk', 'Formula', 'Tube Feeding', 'Cow Milk', 'Goat Milk', 'Soy Milk', 'Other'];
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
+  @ViewChild('startTimePopover') startTimePopover: any;
+  @ViewChild('endTimePopover') endTimePopover: any;
+
   constructor(...args: unknown[]);
 
   constructor() {
@@ -26,6 +28,10 @@ export class FoodTrackingComponent extends TimerBase implements OnInit {
 
   ngOnInit() {
     this.createForm();
+  }
+
+  get foodTrackingFormValid() {
+    return this.foodForm.valid && this.foodForm.dirty;
   }
 
   segmentChanged(event: any) {
@@ -37,6 +43,14 @@ export class FoodTrackingComponent extends TimerBase implements OnInit {
       foodType: new FormControl('', Validators.required),
       notes: new FormControl('')
     });
+  }
+
+  dismissStartTimePopover() {
+    this.startTimePopover.dismiss();
+  }
+
+  dismissEndTimePopover() {
+    this.endTimePopover.dismiss();
   }
 
   save() {

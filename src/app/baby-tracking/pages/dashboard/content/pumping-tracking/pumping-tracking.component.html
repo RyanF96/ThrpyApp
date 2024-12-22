@@ -13,7 +13,7 @@
     </ion-col>
   </ion-row>
   <hr />
-  <div>
+  <div class="inner-container">
     <ion-toolbar>
       <ion-segment value="pumping" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="pumping">
@@ -38,9 +38,10 @@
           </ion-col>
         }
       </ion-button>
-      <ion-popover trigger="startDate" size="cover">
+      <ion-popover #startTimePopover trigger="startDate" size="cover">
         <ng-template>
           <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+          <ion-button (click)="dismissStartPopover()">OK</ion-button>
         </ng-template>
       </ion-popover>
     </ion-row>
@@ -58,7 +59,7 @@
           </ion-col>
         }
       </ion-button>
-      <ion-popover trigger="endDate" size="cover">
+      <ion-popover #endTimePopover trigger="endDate" size="cover">
         <ng-template>
           <ion-datetime
             [(ngModel)]="endDate"
@@ -67,6 +68,7 @@
             presentation="time"
             locale="sl-SI"
             (ngModelChange)="manualTimeEntry()"></ion-datetime>
+          <ion-button (click)="dismissEndPopover()">OK</ion-button>
         </ng-template>
       </ion-popover>
     </ion-row>

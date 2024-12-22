@@ -55,7 +55,7 @@ export class SleepTrackingComponent extends TimerBase implements OnInit {
     this.endDate = today.getTime();
   }
 
-  saveSleep() {
+  save() {
     const settings = localStorage.getItem('settings');
     if (settings) {
       const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;

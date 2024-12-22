@@ -1,70 +1,91 @@
-.container {
-  /* Some container-specific styles here */
+.sleeping-container {
   font-family: 'poppins';
-  padding: 0 10px 0 10px;
-  position: relative;
+  letter-spacing: 1.5px;
 
   .header {
-    margin: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+
+    .back-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .header-text {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .save {
+      ion-button {
+        font-size: 14px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
+    }
   }
 
-  .arrow-left {
-    position: absolute;
-    top: 0;
-    left: 5px;
-    font-size: 24px;
-    font-weight: 200;
-  }
+  .inner-container {
+    hr {
+      border-top: 1px solid #333;
+      margin: 10px 0;
+    }
 
-  hr {
-    border-top: 1px solid #333;
-    margin: 20px 0;
-  }
+    .sleep-time {
+      width: 100%;
+      display: flex;
+      justify-content: center;
 
-  .sleep-time {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+      .header-text {
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
 
-  .timer {
-    position: absolute;
-    top: 180px;
-    left: 0;
-  }
+      ion-button::part(native) {
+        border-radius: 12px;
+        background-color: rgba(227, 34, 69);
+      }
 
-  ion-button::part(native) {
-    border-radius: 12px;
-    background-color: #b8926a;
-  }
+      ion-button {
+        width: 100%;
+        margin: 5px 0 5px 0;
+      }
+    }
 
-  ion-button {
-    width: 100%;
-    margin: 5px 0 5px 0;
-  }
+    .timer-container {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      .time {
+        font-size: 20px;
+      }
+    }
 
-  .sleep-button-row {
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-  }
+    .sleep-details-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
 
-  .times {
-    font-size: 20px;
-  }
+      ion-button {
+        width: 100px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
 
-  .save {
-    bottom: 10px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-  }
+      ion-button::part(native) {
+        border-radius: 24px;
+      }
+    }
 
-  .save-inner-container {
-    margin: 0 10px;
+    .sleep-button-row {
+      margin-top: 70px;
+      display: flex;
+      justify-content: center;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
@@ -15,12 +15,22 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
   private dataService = inject(DataService);
   private toastController = inject(ToastController);
 
+  @ViewChild('startTimePopover') startTimePopover: any;
   componentDestroyed$ = new Subject();
   selectedSegment = 'diaper';
   diaperForm!: FormGroup;
   diaperTypes = ['Pee', 'Poo', 'Mixed', 'Dry'];
   descriptions = ['Solid', 'Loose', 'Runny', 'Mucousy', 'Hard', 'Pebbles', 'Diarrhea'];
   pottyDetails = ['Sat but dry', 'Potty', 'Accident'];
+  colorOptions = [
+    { value: 'yellow', hex: '#997d2f' },
+    { value: 'brown', hex: '#382d0c' },
+    { value: 'black', hex: '#171306' },
+    { value: 'green', hex: '#253f25' },
+    { value: 'red', hex: '#9e340a' },
+    { value: 'white', hex: '#f1e6e1' }
+  ];
+  selectedColor: string = 'yellow';
   diaper = 'diaper';
 
   /** Inserted by Angular inject() migration for backwards compatibility */
@@ -30,6 +40,10 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  get diaperFormValid() {
+    return this.diaperForm.valid && this.diaperForm.dirty;
   }
 
   getFormControl(control: string) {
@@ -98,6 +112,10 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
     });
 
     await toast.present();
+  }
+
+  dismissStartPopover() {
+    this.startTimePopover.dismiss();
   }
 
   ngOnDestroy(): void {

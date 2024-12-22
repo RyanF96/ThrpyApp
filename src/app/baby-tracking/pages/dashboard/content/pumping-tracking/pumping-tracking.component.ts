@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
@@ -15,6 +15,9 @@ import { TimerBase } from '../timer-base/timer-base';
 export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDestroy {
   private dataService = inject(DataService);
   private toastController = inject(ToastController);
+
+  @ViewChild('startTimePopover') startTimePopover: any;
+  @ViewChild('endTimePopover') endTimePopover: any;
 
   selectedSegment = 'pumping';
   pumpingForm!: FormGroup;
@@ -90,6 +93,14 @@ export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDes
         this.presentToast('Please enter an amount.');
       }
     }
+  }
+
+  dismissStartPopover() {
+    this.startTimePopover.dismiss();
+  }
+
+  dismissEndPopover() {
+    this.endTimePopover.dismiss();
   }
 
   async presentToast(message: string) {

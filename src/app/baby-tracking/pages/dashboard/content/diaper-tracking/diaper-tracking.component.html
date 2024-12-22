@@ -1,12 +1,21 @@
-<div class="container">
-  <div class="header">
-    <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
-    <div>Add Diaper</div>
-  </div>
+<div class="diaper-container">
+  <ion-row class="header">
+    <ion-col class="flex justify-start items-center" size="3"> <ion-icon class="back-icon" routerLink="toolbar/tracking/dashboard" name="chevron-back-outline"></ion-icon></ion-col>
+    <ion-col class="flex justify-start items-center" size="6"> <span class="header-text">Add Diaper</span></ion-col>
+    <ion-col class="flex justify-start items-center" size="3">
+      @if (diaperFormValid) {
+        <div class="save">
+          <ion-row>
+            <ion-button (click)="save()"> Save </ion-button>
+          </ion-row>
+        </div>
+      }
+    </ion-col>
+  </ion-row>
   <hr />
-  <div>
+  <div class="inner-container">
     <ion-toolbar>
-      <ion-segment value="all" (ionChange)="segmentChanged($event)">
+      <ion-segment value="diaper" (ionChange)="segmentChanged($event)">
         <ion-segment-button value="diaper">
           <ion-label>Diaper</ion-label>
         </ion-segment-button>
@@ -16,12 +25,12 @@
       </ion-segment>
     </ion-toolbar>
     <form [formGroup]="diaperForm">
-      <ion-row class="sleep-time">
+      <ion-row class="diaper-time">
         <ion-button id="startDate">
-          <ion-col> Start time: </ion-col>
+          <ion-col> <span class="header-text"> Start time: </span> </ion-col>
           @if (!getFormControl('startTime')) {
             <ion-col>
-              <u>Set time</u>
+              <u class="header-text">Set time</u>
             </ion-col>
           }
           @if (getFormControl('startTime')) {
@@ -30,90 +39,94 @@
             </ion-col>
           }
         </ion-button>
-        <ion-popover trigger="startDate" size="cover">
+        <ion-popover #startTimePopover trigger="startDate" size="cover">
           <ng-template>
             <ion-datetime formControlName="startTime" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+            <ion-button (click)="dismissStartPopover()">OK</ion-button>
           </ng-template>
         </ion-popover>
       </ion-row>
       @if (selectedSegment === 'diaper') {
         <ion-list>
           <ion-item>
-            <ion-select (ionChange)="reset($event)" interface="popover" placeholder="Diaper Type" formControlName="diaperType">
+            <ion-label slot="start">Diaper Type:</ion-label>
+            <ion-select slot="end" (ionChange)="reset($event)" interface="popover" placeholder="Select" formControlName="diaperType">
               @for (diaper of diaperTypes; track diaper) {
                 <ion-select-option [value]="diaper">{{ diaper }}</ion-select-option>
               }
             </ion-select>
           </ion-item>
         </ion-list>
-        <!-- DIAPER TYPE SELECTION -->
-        @if (getFormControl('diaperType')) {
-          <ion-item>
-            <ion-label>Optional Details</ion-label>
-          </ion-item>
-        }
         <!-- DIAPER SIZE SELECTION -->
         @if (getFormControl('diaperType') === 'Mixed') {
-          <ion-item>
-            <ion-label>Poo</ion-label>
-          </ion-item>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label>Poo:</ion-label>
+            </ion-item>
+          </ion-list>
         }
         @if (getFormControl('diaperType') === 'Mixed' || getFormControl('diaperType') === 'Poo') {
-          <ion-item>
-            <ion-segment style="margin-bottom: 0" formControlName="diaperSize">
-              <ion-segment-button value="little">
-                <ion-label>Little</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="medium">
-                <ion-label>Medium</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="big">
-                <ion-label>Big</ion-label>
-              </ion-segment-button>
-            </ion-segment>
-          </ion-item>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-segment style="margin-bottom: 0" formControlName="diaperSize">
+                <ion-segment-button value="little">
+                  <ion-label>Little</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="medium">
+                  <ion-label>Medium</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="big">
+                  <ion-label>Big</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-item>
+          </ion-list>
         }
         @if (getFormControl('diaperType') === 'Mixed') {
-          <ion-item>
-            <ion-label>Pee</ion-label>
-          </ion-item>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label>Pee:</ion-label>
+            </ion-item>
+          </ion-list>
         }
         @if (getFormControl('diaperType') === 'Mixed' || getFormControl('diaperType') === 'Pee') {
-          <ion-item>
-            <ion-segment style="margin-bottom: 0" formControlName="peeSize">
-              <ion-segment-button value="little">
-                <ion-label>Little</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="medium">
-                <ion-label>Medium</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="big">
-                <ion-label>Big</ion-label>
-              </ion-segment-button>
-            </ion-segment>
-          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-segment style="margin-bottom: 0" formControlName="peeSize">
+                <ion-segment-button value="little">
+                  <ion-label>Little</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="medium">
+                  <ion-label>Medium</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="big">
+                  <ion-label>Big</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-item>
+          </ion-list>
         }
         <!-- DIAPER COLOR SELECTION -->
         @if (getFormControl('diaperType') === 'Poo' || getFormControl('diaperType') === 'Mixed') {
-          <ion-item>
-            <ion-label> Colour </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-segment style="margin: 10px 0 10px 0" formControlName="diaperColor" [scrollable]="true" value="heart">
-              <ion-segment-button style="background-color: #997d2f; border-radius: 24px; margin: 1px" value="yellow"></ion-segment-button>
-              <ion-segment-button style="background-color: #382d0c; border-radius: 24px; margin: 1px" value="brown"></ion-segment-button>
-              <ion-segment-button style="background-color: #171306; border-radius: 24px; margin: 1px" value="black"></ion-segment-button>
-              <ion-segment-button style="background-color: #253f25; border-radius: 24px; margin: 1px" value="green"></ion-segment-button>
-              <ion-segment-button style="background-color: #9e340a; border-radius: 24px; margin: 1px" value="red"></ion-segment-button>
-              <ion-segment-button style="background-color: #f1e6e1; border-radius: 24px; margin: 1px" value="white"></ion-segment-button>
-            </ion-segment>
-          </ion-item>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label slot="start"> Color: </ion-label>
+              <ion-label slot="end"> {{ selectedColor }} </ion-label>
+            </ion-item>
+            <ion-item class="color-item-container">
+              <ion-segment formControlName="diaperColor" [(ngModel)]="selectedColor" [scrollable]="true">
+                <ion-segment-button *ngFor="let color of colorOptions" [style.background-color]="color.hex" [ngClass]="{ 'selected-color': selectedColor === color.value }" [value]="color.value">
+                </ion-segment-button>
+              </ion-segment>
+            </ion-item>
+          </ion-list>
         }
         <!-- DIAPER DESCRIPTION -->
         @if (getFormControl('diaperType') === 'Poo' || getFormControl('diaperType') === 'Mixed') {
           <ion-list>
             <ion-item>
-              <ion-select interface="popover" placeholder="Description" formControlName="diaperDescription">
+              <ion-label slot="start">Description:</ion-label>
+              <ion-select slot="end" interface="popover" placeholder="Select" formControlName="diaperDescription">
                 @for (description of descriptions; track description) {
                   <ion-select-option [value]="description">{{ description }}</ion-select-option>
                 }
@@ -123,39 +136,35 @@
         }
         <!-- DIAPER RASH SELECTION -->
         @if (getFormControl('diaperType')) {
-          <ion-item>
-            <ion-label>Diaper Rash</ion-label>
-            <ion-toggle formControlName="diaperRash"></ion-toggle>
-          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-label slot="start">Diaper Rash:</ion-label>
+              <ion-toggle slot="end" formControlName="diaperRash"></ion-toggle>
+            </ion-item>
+          </ion-list>
         }
         <!-- DIAPER NOTES -->
         @if (getFormControl('diaperType')) {
-          <ion-row class="input-row">
-            <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
+          <ion-row class="notes-container">
+            <ion-textarea placeholder="Notes" formControlName="notes" autoGrow="true"> </ion-textarea>
           </ion-row>
         }
       }
       @if (selectedSegment === 'potty') {
         <ion-list>
           <ion-item>
-            <ion-select (ionChange)="reset($event)" interface="popover" placeholder="Description" formControlName="pottyDetails">
+            <ion-label slot="start">Description:</ion-label>
+            <ion-select slot="end" (ionChange)="reset($event)" interface="popover" placeholder="Select" formControlName="pottyDetails">
               @for (detail of pottyDetails; track detail) {
                 <ion-select-option [value]="detail">{{ detail }}</ion-select-option>
               }
             </ion-select>
           </ion-item>
         </ion-list>
-        <ion-row class="input-row">
-          <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
+        <ion-row class="notes-container">
+          <ion-textarea placeholder="Notes" formControlName="notes" autoGrow="true"> </ion-textarea>
         </ion-row>
       }
     </form>
-  </div>
-  <div class="save">
-    <div class="save-inner-container">
-      <ion-row class="sleep-time">
-        <ion-button (click)="save()"> Save </ion-button>
-      </ion-row>
-    </div>
   </div>
 </div>

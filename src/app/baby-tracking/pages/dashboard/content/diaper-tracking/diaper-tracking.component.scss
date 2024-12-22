@@ -1,86 +1,120 @@
-.container {
-  /* Some container-specific styles here */
+.diaper-container {
   font-family: 'poppins';
-  padding: 0 10px 0 10px;
-  position: relative;
+  letter-spacing: 1.5px;
 
   .header {
-    margin: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+
+    .back-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .header-text {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .save {
+      ion-button {
+        font-size: 14px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
+    }
   }
 
-  ion-input {
-    border: 1px solid #b8926a;
-    border-radius: 24px;
-    padding: 0 10px !important;
-  }
+  .inner-container {
+    ion-toolbar {
+      --background: none;
+    }
 
-  .input-row {
-    width: 100%;
-    margin: 10px 0;
-  }
+    ion-input {
+      border: 1px solid #b8926a;
+      border-radius: 24px;
+      padding: 0 10px !important;
+    }
 
-  ion-segment {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+    .input-row {
+      width: 100%;
+      margin: 10px 0;
+    }
 
-  .arrow-left {
-    position: absolute;
-    top: 0;
-    left: 5px;
-    font-size: 24px;
-    font-weight: 200;
-  }
+    ion-segment {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-  hr {
-    border-top: 1px solid #333;
-    margin: 20px 0;
-  }
+    hr {
+      border-top: 1px solid #333;
+      margin: 20px 0;
+    }
 
-  .sleep-time {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+    .diaper-time {
+      width: 100%;
+      display: flex;
+      justify-content: center;
 
-  .timer {
-    position: absolute;
-    top: 240px;
-    left: 0;
-  }
+      .header-text {
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
 
-  ion-button::part(native) {
-    border-radius: 12px;
-    background-color: #b8926a;
-  }
+      ion-button::part(native) {
+        border-radius: 12px;
+        background-color: rgba(227, 34, 69);
+      }
 
-  ion-button {
-    width: 100%;
-    margin: 5px 0 5px 0;
-  }
+      ion-button {
+        width: 100%;
+        margin: 5px 0 5px 0;
+      }
+    }
 
-  .sleep-button-row {
-    margin-top: 100px;
-    display: flex;
-    justify-content: center;
-  }
+    .notes-container {
+      margin-top: 10px;
+      width: 100%;
 
-  .times {
-    font-size: 20px;
-  }
+      ion-textarea {
+        border-radius: 24px;
+        padding: 0 10px !important;
+        color: white;
+        border: none;
+        background-color: rgba(170, 170, 170);
+      }
+    }
 
-  .save {
-    bottom: 10px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-  }
+    .color-item-container {
+      ion-segment {
+        width: 100%;
+        margin-bottom: 20px;
+        padding-bottom: 10px !important;
+        padding-top: 10px !important;
 
-  .save-inner-container {
-    margin: 0 10px;
+        ion-segment-button {
+          border-radius: 24px;
+          margin: 1px;
+        }
+      }
+
+      .selected-color {
+        border: 2px solid #fff;
+        box-shadow: 0 0 4px rgba(122, 121, 121, 0.8);
+      }
+
+      ion-segment-button {
+        --indicator-color: none;
+      }
+    }
+
+    ion-item::part(native) {
+      padding-left: 0;
+    }
+
+    ion-item {
+      --inner-padding-end: 0;
+    }
   }
 }

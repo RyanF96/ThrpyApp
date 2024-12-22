@@ -1,61 +1,75 @@
-<div class="container">
-  <div class="header">
-    <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
-    <div>Add Solids</div>
-  </div>
+<div class="solids-container">
+  <ion-row class="header">
+    <ion-col class="flex justify-start items-center" size="3"> <ion-icon class="back-icon" routerLink="toolbar/tracking/dashboard" name="chevron-back-outline"></ion-icon></ion-col>
+    <ion-col class="flex justify-start items-center" size="6"> <span class="header-text">Add Solids</span></ion-col>
+    <ion-col class="flex justify-start items-center" size="3">
+      @if (solidsFormValid) {
+        <div class="save">
+          <ion-row>
+            <ion-button (click)="save()"> Save </ion-button>
+          </ion-row>
+        </div>
+      }
+    </ion-col>
+  </ion-row>
   <hr />
-  @if (solidsForm) {
-    <form [formGroup]="solidsForm">
-      <ion-row class="sleep-time">
-        <ion-button id="startDate">
-          <ion-col> Start time: </ion-col>
-          @if (!getFormControl('startTime')) {
+  <div class="inner-container">
+    @if (solidsForm) {
+      <form class="form-container" [formGroup]="solidsForm">
+        <ion-row class="solids-time">
+          <ion-button id="startDate">
             <ion-col>
-              <u>Set time</u>
+              <span class="header-text">Start time:</span>
             </ion-col>
-          }
-          @if (getFormControl('startTime')) {
-            <ion-col>
-              <u>{{ getFormControl('startTime') | date: 'shortTime' }}</u>
-            </ion-col>
-          }
-        </ion-button>
-        <ion-popover trigger="startDate" size="cover">
-          <ng-template>
-            <ion-datetime formControlName="startTime" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-select label="Food" [multiple]="true" formControlName="food">
-            @for (food of foodItems; track food) {
-              <ion-select-option [value]="food.id">{{ food.description }}</ion-select-option>
+            @if (!getFormControl('startTime')) {
+              <ion-col>
+                <u class="header-text">Set time</u>
+              </ion-col>
             }
-          </ion-select>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <ion-select label="Reaction" [multiple]="true" formControlName="reactions">
-            @for (reaction of reactions; track reaction) {
-              <ion-select-option [value]="reaction.id">{{ reaction.description }}</ion-select-option>
+            @if (getFormControl('startTime')) {
+              <ion-col>
+                <u>{{ getFormControl('startTime') | date: 'shortTime' }}</u>
+              </ion-col>
             }
-          </ion-select>
-        </ion-item>
-      </ion-row>
-      <ion-row class="input-row">
-        <ion-input type="text" placeholder="Notes" formControlName="notes"> </ion-input>
-      </ion-row>
-    </form>
-  }
-  <ng-container>
-    <div class="save">
-      <div class="save-inner-container">
-        <ion-row class="sleep-time">
-          <ion-button (click)="save()"> Save </ion-button>
+          </ion-button>
+          <ion-popover #startTimePopover trigger="startDate" size="cover">
+            <ng-template>
+              <ion-datetime formControlName="startTime" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+              <ion-button (click)="dismissStartTimePopover()">OK</ion-button>
+            </ng-template>
+          </ion-popover>
         </ion-row>
-      </div>
-    </div>
-  </ng-container>
+
+        <ion-list>
+          <ion-item>
+            <ion-select [multiple]="true" label="Food:" formControlName="food" (ionChange)="updateDisplaySelectedFoods($event)">
+              @for (food of foodItems; track food) {
+                <ion-select-option [value]="food.id">{{ food.description }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+          <div *ngIf="selectedFoods?.length" class="selected-values">
+            <div *ngFor="let food of selectedFoods" class="selected-item">- {{ food }}</div>
+          </div>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>
+            <ion-select label="Reaction:" [multiple]="true" formControlName="reactions" (ionChange)="updateDisplaySelectedReactions($event)">
+              @for (reaction of reactions; track reaction) {
+                <ion-select-option [value]="reaction.id">{{ reaction.description }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+          <div *ngIf="selectedReactions?.length" class="selected-values">
+            <div *ngFor="let reaction of selectedReactions" class="selected-item">- {{ reaction }}</div>
+          </div>
+        </ion-list>
+
+        <ion-row class="notes-container">
+          <ion-textarea placeholder="Notes" formControlName="notes" autoGrow="true"></ion-textarea>
+        </ion-row>
+      </form>
+    }
+  </div>
 </div>

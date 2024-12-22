@@ -61,34 +61,29 @@ export class PumpingTrackingComponent extends TimerBase implements OnInit, OnDes
   }
 
   save() {
-    const settings = localStorage.getItem('settings');
-    if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
-      const pumping = {
-        childId: childId,
-        duration: this.elapsedTime,
-        startDate: new Date(this.startDate),
-        endDate: new Date(this.endDate),
-        notes: this.getFormControlValue('notes'),
-        total: this.getFormControlValue('total'),
-        left: this.getFormControlValue('left'),
-        right: this.getFormControlValue('right')
-      } as IPumping;
+    const pumping = {
+      duration: this.elapsedTime,
+      startDate: new Date(this.startDate),
+      endDate: new Date(this.endDate),
+      notes: this.getFormControlValue('notes'),
+      total: this.getFormControlValue('total'),
+      left: this.getFormControlValue('left'),
+      right: this.getFormControlValue('right')
+    } as IPumping;
 
-      if (pumping.total > 0) {
-        this.dataService
-          .savePumping(pumping)
-          .pipe(takeUntil(this.componentDestroyed$))
-          .subscribe((res) => {
-            if (res) {
-              this.pumpingForm.reset();
-              this.reset();
-              this.presentToast('Saved Successfuly!');
-            }
-          });
-      } else {
-        this.presentToast('Please enter an amount.');
-      }
+    if (pumping.total > 0) {
+      this.dataService
+        .savePumping(pumping)
+        .pipe(takeUntil(this.componentDestroyed$))
+        .subscribe((res) => {
+          if (res) {
+            this.pumpingForm.reset();
+            this.reset();
+            this.presentToast('Saved Successfuly!');
+          }
+        });
+    } else {
+      this.presentToast('Please enter an amount.');
     }
   }
 

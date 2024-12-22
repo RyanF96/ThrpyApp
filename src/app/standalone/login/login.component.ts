@@ -43,28 +43,27 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   signIn() {
-    this.router.navigate(['/toolbar']);
-    // const user = this.loginForm.value;
-    // signInWithEmailAndPassword(this.auth, user.email, user.password)
-    //   .then((userCredential) => {
-    //     if (userCredential) {
-    //       this.auth.authStateReady().then(() => {
-    //         const user = userCredential.user;
-    //         user
-    //           .getIdToken()
-    //           .then((accessToken) => {
-    //             localStorage.setItem('accessToken', accessToken);
-    //           })
-    //           .catch((error) => {
-    //             console.error('Error getting access token:', error);
-    //           });
-    //         this.authService.login(user.uid).pipe(takeUntil(this.componentDestroyed$)).subscribe();
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     window.alert(error.message);
-    //   });
+    const user = this.loginForm.value;
+    signInWithEmailAndPassword(this.auth, user.email, user.password)
+      .then((userCredential) => {
+        if (userCredential) {
+          this.auth.authStateReady().then(() => {
+            const user = userCredential.user;
+            user
+              .getIdToken()
+              .then((accessToken) => {
+                localStorage.setItem('accessToken', accessToken);
+              })
+              .catch((error) => {
+                console.error('Error getting access token:', error);
+              });
+            this.authService.login();
+          });
+        }
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
   }
 
   ngOnDestroy() {

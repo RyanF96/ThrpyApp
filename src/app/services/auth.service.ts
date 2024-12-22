@@ -32,26 +32,26 @@ export class AuthService {
     this.dataService.register(user).pipe(
       map((userId) => {
         if (userId) {
-          this.setUserContext(userId);
+          this.setUserContext();
         }
       })
     );
   }
 
-  login(firebaseId: string) {
-    return this.dataService.login(firebaseId).pipe(
-      map((userId) => {
-        if (userId) {
-          this.setUserContext(userId);
-        }
-      })
-    );
+  login() {
+    this.setUserContext();
+    // return this.dataService.login(firebaseId).pipe(
+    //   map((userId) => {
+    //     if (userId) {
+    //       this.setUserContext();
+    //     }
+    //   })
+    // );
   }
 
-  setUserContext(userId: string) {
+  setUserContext() {
     this.setUserStatus = true;
-    localStorage.setItem('userId', userId);
-    this.router.navigateByUrl('/toolbar');
+    this.router.navigate(['/toolbar']);
   }
 
   logout(): void {

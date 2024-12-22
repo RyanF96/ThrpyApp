@@ -40,18 +40,13 @@ export class FoodTrackingComponent extends TimerBase implements OnInit {
   }
 
   save() {
-    const settings = localStorage.getItem('settings');
-    if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
-      const food = {
-        childId: childId,
-        duration: this.elapsedTime,
-        startDate: new Date(this.startDate),
-        endDate: new Date(this.endDate),
-        notes: this.foodForm.get('notes')?.value,
-        foodType: this.foodForm.get('foodType')?.value !== '' ? this.foodForm.get('foodType')?.value : 'Breast Milk'
-      } as IFood;
-      this.commonService.saveFoodDetails(food).subscribe();
-    }
+    const food = {
+      duration: this.elapsedTime,
+      startDate: new Date(this.startDate),
+      endDate: new Date(this.endDate),
+      notes: this.foodForm.get('notes')?.value,
+      foodType: this.foodForm.get('foodType')?.value !== '' ? this.foodForm.get('foodType')?.value : 'Breast Milk'
+    } as IFood;
+    this.commonService.saveFoodDetails(food).subscribe();
   }
 }

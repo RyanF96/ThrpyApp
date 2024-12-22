@@ -20,20 +20,20 @@ export class DataService {
     return this.http.post<string>(this.constants.HTTPS_API_ENDPOINT + `users/register`, user);
   }
 
-  public login(firebaseId: string) {
-    return this.http.get<string>(this.constants.HTTPS_API_ENDPOINT + `users/login?firebaseId=${firebaseId}`);
-  }
+  // public login(firebaseId: string) {
+  //   return this.http.get<string>(this.constants.HTTPS_API_ENDPOINT + `users/login?firebaseId=${firebaseId}`);
+  // }
 
   public checkEmailExists(email: string) {
     return this.http.get<boolean>(this.constants.HTTPS_API_ENDPOINT + `users/check/email?email=${email}`);
   }
 
-  public getUserChildren(userId: string) {
-    return this.http.get<IChild[]>(this.constants.HTTPS_API_ENDPOINT + `users/${userId}/children`);
+  public getUserChildren() {
+    return this.http.get<IChild[]>(this.constants.HTTPS_API_ENDPOINT + `users/children`);
   }
 
-  public AddChild(userId: string, childName: string) {
-    return this.http.post<IChild>(this.constants.HTTPS_API_ENDPOINT + `users/${userId}/add/child?name=${childName}`, null);
+  public AddChild(childName: string) {
+    return this.http.post<IChild>(this.constants.HTTPS_API_ENDPOINT + `users/add/child?name=${childName}`, null);
   }
 
   // SLEEP

@@ -37,14 +37,11 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userId = localStorage.getItem('userId') ?? undefined;
-    if (this.userId) {
-      this.dataService.getUserChildren(this.userId).subscribe((res) => {
-        if (res) {
-          this.children = res;
-        }
-      });
-    }
+    this.dataService.getUserChildren().subscribe((res) => {
+      if (res) {
+        this.children = res;
+      }
+    });
   }
 
   async addChild() {
@@ -53,7 +50,7 @@ export class SettingsComponent implements OnInit {
     });
     modal.onDidDismiss().then((detail: any) => {
       if (detail?.data && this.userId) {
-        this.dataService.AddChild(this.userId, detail?.data).subscribe((res) => {
+        this.dataService.AddChild(detail?.data).subscribe((res) => {
           if (res) {
             this.children?.push(res);
           }

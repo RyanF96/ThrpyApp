@@ -58,22 +58,17 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    const settings = localStorage.getItem('settings');
-    if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
-      const diaperData = this.diaperForm.value as IDiaperDetails;
-      diaperData.type = this.diaper;
-      diaperData.childId = childId;
-      this.dataService
-        .saveDiaperDetails(diaperData)
-        .pipe(takeUntil(this.componentDestroyed$))
-        .subscribe((res) => {
-          if (res) {
-            this.createForm();
-            this.presentToast('bottom');
-          }
-        });
-    }
+    const diaperData = this.diaperForm.value as IDiaperDetails;
+    diaperData.type = this.diaper;
+    this.dataService
+      .saveDiaperDetails(diaperData)
+      .pipe(takeUntil(this.componentDestroyed$))
+      .subscribe((res) => {
+        if (res) {
+          this.createForm();
+          this.presentToast('bottom');
+        }
+      });
   }
 
   reset(event: any) {

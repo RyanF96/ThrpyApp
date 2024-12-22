@@ -56,23 +56,18 @@ export class SleepTrackingComponent extends TimerBase implements OnInit {
   }
 
   saveSleep() {
-    const settings = localStorage.getItem('settings');
-    if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
-      const sleep = {
-        childId: childId,
-        duration: this.elapsedTime,
-        startDate: new Date(this.startDate),
-        endDate: new Date(this.endDate),
-        details: this.sleepDetails
-      } as ISleep;
-      this.dataService.saveSleep(sleep).subscribe((res) => {
-        if (res) {
-          this.reset();
-          this.sleepDetails = null;
-        }
-      });
-    }
+    const sleep = {
+      duration: this.elapsedTime,
+      startDate: new Date(this.startDate),
+      endDate: new Date(this.endDate),
+      details: this.sleepDetails
+    } as ISleep;
+    this.dataService.saveSleep(sleep).subscribe((res) => {
+      if (res) {
+        this.reset();
+        this.sleepDetails = null;
+      }
+    });
   }
 
   dismissStartPopover() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IChildDetails } from 'src/app/data/contracts';
 
 @Component({
@@ -7,9 +7,9 @@ import { IChildDetails } from 'src/app/data/contracts';
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent {
-  defaultProfileImage: string = 'assets/Camera_Color_Icon.svg';
-  selectedProfileImage: string = '';
+export class LandingPageComponent implements OnInit, OnDestroy {
+  defaultProfileImage = 'assets/Camera_Color_Icon.svg';
+  selectedProfileImage = '';
   childProfile!: IChildDetails;
 
   constructor() {}

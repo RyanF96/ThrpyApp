@@ -11,7 +11,6 @@ export class TrackingDashboardComponent implements OnInit {
   itemList: any[] = [];
 
   activatedRoute = inject(ActivatedRoute);
-  constructor() {}
 
   ngOnInit(): void {
     this.itemList.push(

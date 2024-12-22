@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild, inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import Swiper from 'swiper';
 
 @Component({

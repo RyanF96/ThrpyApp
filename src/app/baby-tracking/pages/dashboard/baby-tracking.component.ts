@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 export class BabyTrackingComponent implements OnInit {
   private router = inject(Router);
   private settingsService = inject(SettingsService);
-  menuType: string = 'overlay';
+  menuType = 'overlay';
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 

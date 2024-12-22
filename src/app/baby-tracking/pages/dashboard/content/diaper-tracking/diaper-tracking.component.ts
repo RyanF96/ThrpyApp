@@ -30,7 +30,7 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
     { value: 'red', hex: '#9e340a' },
     { value: 'white', hex: '#f1e6e1' }
   ];
-  selectedColor: string = 'yellow';
+  selectedColor = 'yellow';
   diaper = 'diaper';
 
   /** Inserted by Angular inject() migration for backwards compatibility */

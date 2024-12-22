@@ -10,11 +10,11 @@ import { Subject } from 'rxjs';
   styleUrls: ['./sign-up-child-info.component.scss']
 })
 export class SignUpChildInfoComponent implements OnInit, OnDestroy {
-  defaultProfileImage: string = 'assets/Camera_Transparent_Icon.svg';
-  selectedProfileImage: string = '';
+  defaultProfileImage = 'assets/Camera_Transparent_Icon.svg';
+  selectedProfileImage = '';
   componentDestroyed$ = new Subject();
-  selectedRelation: string = '';
-  hasRelationSelection: boolean = false;
+  selectedRelation = '';
+  hasRelationSelection = false;
   childInfoForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}

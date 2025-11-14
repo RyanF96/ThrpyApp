@@ -1,0 +1,111 @@
+ion-content {
+  --background: #85abb3;
+}
+
+.profile-container {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
+
+  .top-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      font-size: 30px;
+      color: white;
+    }
+
+    margin-bottom: 10px;
+  }
+
+  .profile-image-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .profile-image-container {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 10px;
+
+      .default-profile-image {
+        width: 75px;
+        height: 75px;
+        color: #85abb3;
+      }
+
+      .selected-profile-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .inner-details {
+    .gender-row {
+      ion-segment {
+        border-radius: 24px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+        border: none;
+        background-color: white;
+        height: 48px;
+        color: #85abb3;
+
+        ion-segment-button {
+          .inner-segment-container {
+            display: flex;
+            align-items: center;
+            ion-icon {
+              font-size: 48px;
+              margin-right: 5px;
+            }
+            ion-label {
+              color: inherit;
+              font-weight: normal;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+
+      ion-segment-button.segment-button-checked {
+        --border-radius: 24px;
+        --ion-background-color: red;
+        color: white;
+      }
+    }
+
+    .age-row {
+      background-color: white;
+      border-radius: 24px;
+      margin: 15px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #85abb3;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .activities-row {
+      background-color: white;
+      border-radius: 24px;
+      margin: 15px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #85abb3;
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+}

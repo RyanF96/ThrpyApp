@@ -1,0 +1,32 @@
+.tracking-dashboard {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .row-item-container {
+    width: 90vw;
+    background-color: rgba(227, 34, 69);
+    border-radius: 24px;
+    margin: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    border: 1px solid rgb(171, 162, 141);
+
+    .icon-container {
+      display: flex;
+      ion-icon {
+        padding: 5px;
+        font-size: 40px;
+      }
+    }
+
+    .item-name-container {
+      font-size: 16px;
+    }
+  }
+}

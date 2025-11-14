@@ -1,35 +1,34 @@
 .container {
-    margin: 5px;
-    height: 100%;
+  margin: 5px;
+  height: 100%;
 
+  .center-row {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
 
-    .center-row {
-        display: flex;
-        justify-content: center;
-        position: relative;
-    }
+  ion-item {
+    width: 100%;
+  }
 
-    ion-item {
-        width: 100%;
-    }
+  ion-row {
+    margin: 10px 0 10px 0;
+  }
 
-    ion-row {
-        margin: 10px 0 10px 0;
-    }
+  .close {
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    font-size: 32px;
+    font-weight: 200;
+  }
 
-    .close {
-        position: absolute;
-        top: 0px;
-        left: 10px;
-        font-size: 32px;
-        font-weight: 200;
-    }
-
-    .accept {
-        position: absolute;
-        top: 0px;
-        left: 240px;
-        font-size: 32px;
-        font-weight: 200;
-    }
+  .accept {
+    position: absolute;
+    top: 0px;
+    left: 240px;
+    font-size: 32px;
+    font-weight: 200;
+  }
 }

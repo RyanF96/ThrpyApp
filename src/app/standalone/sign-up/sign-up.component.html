@@ -1,0 +1,94 @@
+<ion-content class="ion-padding">
+  <div class="register-container">
+    <div class="header-container">
+      <div class="header-image-container">
+        <ion-img class="header-image" src="assets/Join_Header_Img.png" alt="Sign Up Image"></ion-img>
+      </div>
+      <div>
+        <h1 class="sign-up-header">join grow</h1>
+      </div>
+    </div>
+    <form [formGroup]="registerForm">
+      <div class="form-container">
+        <ion-row class="input-row">
+          <ion-input placeholder="Username" formControlName="username"></ion-input>
+          @if (username.hasError('required') && (username.dirty || username.touched)) {
+            <div class="alert">Please enter a valid username.</div>
+          }
+        </ion-row>
+        <ion-row class="input-row">
+          <ion-input placeholder="Email Address" formControlName="email"></ion-input>
+          @if (email.hasError('email') && (email.dirty || email.touched)) {
+            <div class="alert">Please enter a valid email address.</div>
+          }
+          @if (email.hasError('emailExists') && (email.dirty || email.touched)) {
+            <div class="alert">Email already exists.</div>
+          }
+        </ion-row>
+        <ion-row class="input-row">
+          <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+          @if (password.hasError('required') && (password.dirty || password.touched)) {
+            <div class="alert">Password is required.</div>
+          }
+          @if (password.hasError('minlength') && (password.dirty || password.touched)) {
+            <div class="alert">Password must be at least 8 characters long.</div>
+          }
+          @if (password.hasError('pattern') && (password.dirty || password.touched)) {
+            <div class="alert">Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character.</div>
+          }
+        </ion-row>
+        <ion-row class="input-row">
+          <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
+          @if (!checkPassword() && (confirmPassword.dirty || confirmPassword.touched)) {
+            <div class="alert">Passwords do not match.</div>
+          }
+        </ion-row>
+
+        <div class="sub-confirmation-info-container">
+          <ion-row class="sub-header">
+            <h1>By creating an account you can</h1>
+          </ion-row>
+          <ion-row class="sub-header-text">
+            <p>Sync your baby's data accross your devices</p>
+            <p>Restore your data if you change your device</p>
+          </ion-row>
+        </div>
+
+        <div class="actions-container">
+          <ion-row class="button-row">
+            <ion-button class="sign-button" (click)="createFirebaseUser()"> Next </ion-button>
+          </ion-row>
+          <ion-row>
+            <div class="policy-header">By signing up, you agree to our <a routerLink="">Terms of Service & Privacy Policy</a></div>
+          </ion-row>
+        </div>
+
+        <!-- <ion-row> Or sign up with </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button>
+              <ion-icon name="logo-apple"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button>
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button>
+              <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row> -->
+      </div>
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col class="footer-container"> already have an account? <a routerLink="/login">Login</a> </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

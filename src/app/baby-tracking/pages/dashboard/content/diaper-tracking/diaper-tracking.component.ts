@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
@@ -11,20 +11,39 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './diaper-tracking.component.html',
   styleUrls: ['./diaper-tracking.component.scss']
 })
-
 export class DiaperTrackingComponent implements OnInit, OnDestroy {
+  private dataService = inject(DataService);
+  private toastController = inject(ToastController);
+
+  @ViewChild('startTimePopover') startTimePopover: any;
   componentDestroyed$ = new Subject();
-  selectedSegment: string = 'diaper';
+  selectedSegment = 'diaper';
   diaperForm!: FormGroup;
   diaperTypes = ['Pee', 'Poo', 'Mixed', 'Dry'];
   descriptions = ['Solid', 'Loose', 'Runny', 'Mucousy', 'Hard', 'Pebbles', 'Diarrhea'];
   pottyDetails = ['Sat but dry', 'Potty', 'Accident'];
+  colorOptions = [
+    { value: 'yellow', hex: '#997d2f' },
+    { value: 'brown', hex: '#382d0c' },
+    { value: 'black', hex: '#171306' },
+    { value: 'green', hex: '#253f25' },
+    { value: 'red', hex: '#9e340a' },
+    { value: 'white', hex: '#f1e6e1' }
+  ];
+  selectedColor = 'yellow';
   diaper = 'diaper';
-  constructor(private dataService: DataService, private toastController: ToastController) {
-  }
+
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  get diaperFormValid() {
+    return this.diaperForm.valid && this.diaperForm.dirty;
   }
 
   getFormControl(control: string) {
@@ -49,26 +68,30 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
       pottyDetails: new FormControl(''),
       diaperRash: new FormControl(false),
       notes: new FormControl('')
-    })
+    });
   }
 
   save() {
     const settings = localStorage.getItem('settings');
     if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
       const diaperData = this.diaperForm.value as IDiaperDetails;
       diaperData.type = this.diaper;
       diaperData.childId = childId;
-      this.dataService.saveDiaperDetails(diaperData).pipe(takeUntil(this.componentDestroyed$)).subscribe((res) => {
-        if (res) {
-          this.createForm();
-          this.presentToast('bottom');
-        }
-      })
+      this.dataService
+        .saveDiaperDetails(diaperData)
+        .pipe(takeUntil(this.componentDestroyed$))
+        .subscribe((res) => {
+          if (res) {
+            this.createForm();
+            this.presentToast('bottom');
+          }
+        });
     }
   }
 
   reset(event: any) {
+    //TODO?
     this.setFormControl('diaperSize', '');
     this.setFormControl('peeSize', '');
     this.setFormControl('diaperColor', '');
@@ -85,10 +108,14 @@ export class DiaperTrackingComponent implements OnInit, OnDestroy {
     const toast = await this.toastController.create({
       message: 'Saved Successfuly!',
       duration: 3000,
-      position: position,
+      position: position
     });
 
     await toast.present();
+  }
+
+  dismissStartPopover() {
+    this.startTimePopover.dismiss();
   }
 
   ngOnDestroy(): void {

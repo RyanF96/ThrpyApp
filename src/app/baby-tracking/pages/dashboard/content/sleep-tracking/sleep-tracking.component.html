@@ -1,78 +1,86 @@
-<ion-content>
-    <div class="container">
-        <div class="header">
-            <ion-icon routerLink="../" class="arrow-left" name="chevron-back-outline"></ion-icon>
-            <div>
-                Add Sleep
-            </div>
+<div class="sleeping-container">
+  <ion-row class="header">
+    <ion-col class="flex justify-start items-center" size="3"> <ion-icon class="back-icon" routerLink="toolbar/tracking/dashboard" name="chevron-back-outline"></ion-icon></ion-col>
+    <ion-col class="flex justify-start items-center" size="6"> <span class="header-text">Add Sleep</span></ion-col>
+    <ion-col class="flex justify-start items-center" size="3">
+      @if (state == 2) {
+        <div class="save">
+          <ion-row>
+            <ion-button (click)="save()"> Save </ion-button>
+          </ion-row>
         </div>
-        <hr>
-        <div>
-            <ion-row class="sleep-time">
-                <ion-button id="startDate" (click)="presentStartPopover($event)">
-                    <ion-col>
-                        Start time:
-                    </ion-col>
-                    <ion-col *ngIf="!startDate">
-                        <u>Set time</u>
-                    </ion-col>
-                    <ion-col *ngIf="startDate">
-                        <u>{{startDate | date:'shortTime'}}</u>
-                    </ion-col>
-                </ion-button>
-                <ion-popover #startTimePopover [isOpen]="startIsOpen" (didDismiss)="startIsOpen = false" size="auto">
-                    <ng-template>
-                        <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm"
-                            pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
-                        <ion-button (click)="dismissStartPopover()">OK</ion-button>
-                    </ng-template>
-                </ion-popover>
-            </ion-row>
-            <ion-row class="sleep-time">
-                <ion-button id="endDate" (click)="presentEndPopover($event)">
-                    <ion-col>
-                        End Time:
-                    </ion-col>
-                    <ion-col *ngIf="!endDate">
-                        <u>Set time</u>
-                    </ion-col>
-                    <ion-col *ngIf="endDate">
-                        <u>{{endDate | date:'shortTime'}}</u>
-                    </ion-col>
-                </ion-button>
-                <ion-popover #endTimePopover trigger="endDate" size="auto" [isOpen]="endIsOpen"
-                    (didDismiss)="endIsOpen = false">
-                    <ng-template>
-                        <ion-datetime [(ngModel)]="endDate" displayFormat="MMM DD, YYYY HH:mm"
-                            pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"
-                            (ngModelChange)="manualTimeEntry()"></ion-datetime>
-                        <ion-button (click)="dismissEndPopover()">OK</ion-button>
-                    </ng-template>
-                </ion-popover>
-            </ion-row>
-            <ion-row class="timer sleep-time" *ngIf="seconds || minutes || hours">
-                <div class="times">
-                    <p>{{formattedTime}}</p>
-                </div>
-            </ion-row>
-            <ion-row class="sleep-button-row">
-                <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
-            </ion-row>
-            <ion-row *ngIf="state === 2">
-                <ion-col (click)="reset()" class="sleep-time">Reset</ion-col>
-                <ion-col class="sleep-time" (click)="addDetails()">Details</ion-col>
-            </ion-row>
+      }
+    </ion-col>
+  </ion-row>
+  <hr />
+  <div class="inner-container">
+    <ion-row class="sleep-time">
+      <ion-button id="startDate" (click)="presentStartPopover($event)">
+        <ion-col> <span class="header-text"> Start time: </span> </ion-col>
+        @if (!startDate) {
+          <ion-col>
+            <u class="header-text">Set time</u>
+          </ion-col>
+        }
+        @if (startDate) {
+          <ion-col>
+            <u>{{ startDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover #startTimePopover [isOpen]="startIsOpen" (didDismiss)="startIsOpen = false" size="auto">
+        <ng-template>
+          <ion-datetime [(ngModel)]="startDate" displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm" presentation="time" locale="sl-SI"></ion-datetime>
+          <ion-button (click)="dismissStartPopover()">OK</ion-button>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    <ion-row class="sleep-time">
+      <ion-button id="endDate" (click)="presentEndPopover($event)">
+        <ion-col> <span class="header-text"> End Time: </span></ion-col>
+        @if (!endDate) {
+          <ion-col>
+            <u class="header-text">Set time</u>
+          </ion-col>
+        }
+        @if (endDate) {
+          <ion-col>
+            <u>{{ endDate | date: 'shortTime' }}</u>
+          </ion-col>
+        }
+      </ion-button>
+      <ion-popover #endTimePopover trigger="endDate" size="auto" [isOpen]="endIsOpen" (didDismiss)="endIsOpen = false">
+        <ng-template>
+          <ion-datetime
+            [(ngModel)]="endDate"
+            displayFormat="MMM DD, YYYY HH:mm"
+            pickerFormat="MMM DD, YYYY HH:mm"
+            presentation="time"
+            locale="sl-SI"
+            (ngModelChange)="manualTimeEntry()"></ion-datetime>
+          <ion-button (click)="dismissEndPopover()">OK</ion-button>
+        </ng-template>
+      </ion-popover>
+    </ion-row>
+    @if (seconds || minutes || hours) {
+      <ion-row class="timer-container">
+        <div class="time">
+          <p>{{ formattedTime }}</p>
         </div>
-        <ng-container *ngIf="state === 2">
-            <div class="save">
-                <div class="save-inner-container">
-                    <ion-row class="sleep-time">
-                        <ion-button (click)="saveSleep()">
-                            Save
-                        </ion-button>
-                    </ion-row>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-</ion-content>
+      </ion-row>
+    }
+    <ion-row class="sleep-button-row">
+      <app-circular-button (buttonClicked)="checkTimer($event)" [stateChange]="state"></app-circular-button>
+    </ion-row>
+    @if (state === 2) {
+      <ion-row class="sleep-details-container">
+        <ion-col (click)="reset()">
+          <ion-button fill="outline"> Reset </ion-button>
+        </ion-col>
+        <ion-col (click)="addDetails()">
+          <ion-button fill="outline"> Details </ion-button>
+        </ion-col>
+      </ion-row>
+    }
+  </div>
+</div>

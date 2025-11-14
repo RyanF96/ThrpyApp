@@ -12,8 +12,6 @@ export class CircularButtonComponent implements OnChanges {
   //1 started
   //2 stopped
   state = 0;
-  constructor() {
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['stateChange']) {

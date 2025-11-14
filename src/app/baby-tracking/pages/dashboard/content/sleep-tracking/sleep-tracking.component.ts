@@ -1,8 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { ISleep, ISleepDetails } from 'src/app/data/contracts';
 import { SettingsEnum } from 'src/app/data/enums';
 import { DataService } from 'src/app/services/data.service';
-import { SettingsService } from 'src/app/services/settings.service';
 import { SleepDetailsDialogComponent } from './dialogs/sleep-details-dialog/sleep-details-dialog.component';
 import { ModalController } from '@ionic/angular';
 import { TimerBase } from '../timer-base/timer-base';
@@ -14,22 +13,31 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./sleep-tracking.component.scss']
 })
 export class SleepTrackingComponent extends TimerBase implements OnInit {
+  private dataService = inject(DataService);
+  private commonService = inject(CommonService);
+  private modalController = inject(ModalController);
+
   sleepDetails: ISleepDetails | undefined | null;
   @ViewChild('startTimePopover') startTimePopover: any;
   startIsOpen = false;
   @ViewChild('endTimePopover') endTimePopover: any;
   endIsOpen = false;
 
-  constructor(private dataService: DataService, private commonService: CommonService, private modalController: ModalController) {
-    super()
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    super();
   }
+
   ngOnInit(): void {
     this.getSleepDetailOptions();
   }
 
   getSleepDetailOptions() {
     this.commonService.getSleepDetailOptions().subscribe((res) => {
-    })
+      //TODO?
+    });
   }
 
   presentStartPopover(e: Event) {
@@ -47,23 +55,23 @@ export class SleepTrackingComponent extends TimerBase implements OnInit {
     this.endDate = today.getTime();
   }
 
-  saveSleep() {
+  save() {
     const settings = localStorage.getItem('settings');
     if (settings) {
-      const childId = JSON.parse(settings).find((x: { key: SettingsEnum; }) => x.key === SettingsEnum.SelectedChild)?.value;
+      const childId = JSON.parse(settings).find((x: { key: SettingsEnum }) => x.key === SettingsEnum.SelectedChild)?.value;
       const sleep = {
         childId: childId,
         duration: this.elapsedTime,
         startDate: new Date(this.startDate),
         endDate: new Date(this.endDate),
         details: this.sleepDetails
-      } as ISleep
+      } as ISleep;
       this.dataService.saveSleep(sleep).subscribe((res) => {
         if (res) {
           this.reset();
           this.sleepDetails = null;
         }
-      })
+      });
     }
   }
 
@@ -88,7 +96,7 @@ export class SleepTrackingComponent extends TimerBase implements OnInit {
       if (detail) {
         this.sleepDetails = detail.data;
       }
-    })
+    });
     return await modal.present();
   }
 }

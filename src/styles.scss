@@ -6,39 +6,38 @@
 /* Other global styles and customizations can go below */
 
 .add-child-modal {
-    position: absolute;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
 
-    &::part(content) {
-        width: 100px;
-        height: 300px;
-        border-radius: 10px;
-    }
+  &::part(content) {
+    width: 100px;
+    height: 300px;
+    border-radius: 10px;
+  }
 }
 
 .sleep-details-modal-class {
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: none;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
-
 .sleep-details-modal-class::part(content) {
-    position: fixed;
-    width: 80%;
-    height: 80%;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    z-index: 9999;
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 9999;
 }
 
 :root {
-    --ion-font-family: 'poppins';
+  --ion-font-family: 'poppins';
 }
 
 .heading1 {
-    font-weight: 600;
-    font-size: 18px;
+  font-weight: 600;
+  font-size: 18px;
 }

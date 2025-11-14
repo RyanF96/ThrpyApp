@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -9,7 +9,11 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class AuthService {
-  userLoggedIn: boolean = false;
+  private dataService = inject(DataService);
+  private router = inject(Router);
+  private auth = inject(Auth);
+
+  userLoggedIn = false;
 
   get isUserLoggedIn() {
     return this.userLoggedIn;
@@ -19,28 +23,35 @@ export class AuthService {
     this.userLoggedIn = loggedIn;
   }
 
-  constructor(private dataService: DataService, private router: Router, private auth: Auth) { }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   register(user: IUserIn) {
-    this.dataService.register(user).pipe(map((userId) => {
-      if (userId) {
-        this.setUserContext(userId);
-      }
-    }));
+    this.dataService.register(user).pipe(
+      map((userId) => {
+        if (userId) {
+          this.setUserContext(userId);
+        }
+      })
+    );
   }
 
   login(firebaseId: string) {
-    return this.dataService.login(firebaseId).pipe(map((userId) => {
-      if (userId) {
-        this.setUserContext(userId);
-      }
-    }))
+    return this.dataService.login(firebaseId).pipe(
+      map((userId) => {
+        if (userId) {
+          this.setUserContext(userId);
+        }
+      })
+    );
   }
 
   setUserContext(userId: string) {
     this.setUserStatus = true;
     localStorage.setItem('userId', userId);
-    this.router.navigateByUrl('/thrpy');
+    this.router.navigateByUrl('/toolbar');
   }
 
   logout(): void {

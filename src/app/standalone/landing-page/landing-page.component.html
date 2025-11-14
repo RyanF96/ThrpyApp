@@ -1,0 +1,57 @@
+<ion-content class="ion-padding">
+  <div class="profile-container">
+    <div class="top-name"><h1>Lilly</h1></div>
+
+    <div class="profile-image-row">
+      <ion-row>
+        <div class="profile-image-container">
+          <ion-img *ngIf="!childProfile.profileImage; else selectedImage" [src]="defaultProfileImage" alt="Camera Icon" class="default-profile-image"></ion-img>
+          <ng-template #selectedImage>
+            <ion-img [src]="childProfile.profileImage" alt="Selected image" class="selected-profile-image"></ion-img>
+          </ng-template>
+        </div>
+      </ion-row>
+    </div>
+
+    <div class="inner-details">
+      <ion-row class="gender-row">
+        <ion-segment value="{{ childProfile.gender }}">
+          <ion-segment-button value="female">
+            <div class="inner-segment-container">
+              <ion-icon src="assets/Girl_Color_Icon.svg" alt="girl image-icon"></ion-icon>
+              <ion-label>girl</ion-label>
+            </div>
+          </ion-segment-button>
+          <ion-segment-button value="male">
+            <div class="inner-segment-container">
+              <ion-icon src="assets/Boy_Color_Icon.svg" alt="boy image-icon"></ion-icon>
+              <ion-label>boy</ion-label>
+            </div>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-row>
+
+      <ion-row class="age-row">
+        <ion-col class="slide-image-col" size="3">
+          <ion-img src="assets/Hands_Transparent.svg" alt="Slide two image-icon" class="slide-image"></ion-img>
+        </ion-col>
+        <ion-col class="slide-description-col" size="9">
+          <ion-row>
+            <h1>{{ childProfile.name }} is {{ getFormattedAge(childProfile.birthDate) }} old</h1>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="activities-row">
+        <ion-col class="slide-image-col" size="3">
+          <ion-img src="assets/Puzzle_Transparent.svg" alt="Slide two image-icon" class="slide-image"></ion-img>
+        </ion-col>
+        <ion-col class="slide-description-col" size="9">
+          <ion-row>
+            <h1>{{ childProfile.activityCount }} Activities completed</h1>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

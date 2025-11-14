@@ -1,0 +1,17 @@
+<router-outlet name="layout"></router-outlet>
+<ion-tabs color="secondary">
+  <ion-tab-bar style="height: 10vh" slot="bottom">
+    <ion-tab-button (click)="navigate('toolbar/tracking')" tab="tracking">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      Tracking
+    </ion-tab-button>
+    <ion-tab-button tab="library">
+      <ion-icon name="library"></ion-icon>
+      Development
+    </ion-tab-button>
+    <ion-tab-button tab="insights">
+      <ion-icon name="radio"></ion-icon>
+      Insights
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

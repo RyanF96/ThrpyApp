@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="container">
+    <div class="header">
+      <ion-icon (click)="closeModal()" class="arrow-left" name="chevron-back-outline"></ion-icon>
+      <div>Add Child</div>
+    </div>
+    <hr />
+    <div [formGroup]="childForm">
+      <ion-row>
+        <ion-input [ngClass]="{ 'invalid-input': isInvalid }" placeholder="Name" formControlName="name"></ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-button (disabled)="(isInvalid)" (click)="save()">
+          <ion-col> save </ion-col>
+        </ion-button>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

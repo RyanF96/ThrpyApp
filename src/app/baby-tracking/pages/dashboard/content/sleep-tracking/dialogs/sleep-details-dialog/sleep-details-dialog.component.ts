@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { IDetails, ISleepDetails } from 'src/app/data/contracts';
@@ -10,14 +10,21 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./sleep-details-dialog.component.scss']
 })
 export class SleepDetailsDialogComponent implements OnInit {
+  private navParams = inject(NavParams);
+  private formBuilder = inject(FormBuilder);
+  private modalController = inject(ModalController);
+  private commonService = inject(CommonService);
+
   detailsForm: FormGroup = new FormGroup({});
   startSleepDetails: IDetails[] = [];
   howItHappened: IDetails[] = [];
   endOfSleep: IDetails[] = [];
   sleepDetails: ISleepDetails | undefined;
 
-  constructor(private navParams: NavParams, private formBuilder: FormBuilder, private modalController: ModalController, private commonService: CommonService) {
-  }
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   ngOnInit() {
     this.sleepDetails = this.navParams.get('details');
@@ -44,8 +51,7 @@ export class SleepDetailsDialogComponent implements OnInit {
   }
 
   save() {
-    let sleepDetails = this.detailsForm.value as ISleepDetails;
+    const sleepDetails = this.detailsForm.value as ISleepDetails;
     this.modalController.dismiss(sleepDetails);
   }
-
 }

@@ -1,76 +1,105 @@
-.container {
-    /* Some container-specific styles here */
-    font-family: "poppins";
-    padding: 0 10px 0 10px;
-    position: relative;
-    height: 100vh;
+.solids-container {
+  font-family: 'poppins';
+  letter-spacing: 1.5px;
 
-    .header {
-        margin: 20px;
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .back-icon {
+      font-size: 24px;
+      cursor: pointer;
     }
 
-    .arrow-left {
-        position: absolute;
-        top: 0;
-        left: 5px;
-        font-size: 24px;
-        font-weight: 200;
+    .header-text {
+      flex-grow: 1;
+      text-align: center;
     }
-
-    hr {
-        border-top: 1px solid #333;
-        margin: 20px 0;
-    }
-
-    .sleep-time {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    ion-input {
-        border: 1px solid #B8926A;
-        border-radius: 24px;
-        padding: 0 10px !important;
-
-    }
-
-    .input-row {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    ion-item {
-        width: 100%;
-    }
-
-    ion-row {
-        margin: 10px 0 10px 0;
-    }
-
-    ion-button::part(native) {
-        border-radius: 12px;
-        background-color: #B8926A;
-    }
-
-    ion-button {
-        width: 100%;
-        margin: 5px 0 5px 0;
-    }
-
 
     .save {
-        bottom: 10px;
-        left: 0;
-        position: fixed;
-        width: 100%;
+      ion-button {
+        font-size: 14px;
+        font-family: 'poppins';
+        letter-spacing: 1.5px;
+      }
+    }
+  }
+
+  .inner-container {
+    hr {
+      border-top: 1px solid #333;
+      margin: 10px 0;
     }
 
-    .save-inner-container {
-        margin: 0 10px;
+    ion-segment {
+      width: 100%;
+      margin-bottom: 20px;
     }
+
+    .solids-time {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      .header-text {
+        font-family: 'Poppins';
+        letter-spacing: 1.5px;
+      }
+
+      ion-button::part(native) {
+        border-radius: 12px;
+        background-color: rgba(227, 34, 69);
+      }
+
+      ion-button {
+        width: 100%;
+        margin: 5px 0;
+      }
+    }
+
+    .form-container {
+      margin-top: 15px;
+
+      ion-list {
+        margin-bottom: 10px;
+
+        ion-select {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .selected-values {
+          margin-top: 5px;
+          .selected-item {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--ion-color-primary);
+          }
+        }
+      }
+
+      .notes-container {
+        width: 100%;
+
+        ion-textarea {
+          border-radius: 24px;
+          padding: 0 10px !important;
+          color: white;
+          border: none;
+          background-color: rgba(170, 170, 170);
+        }
+      }
+
+      ion-item::part(native) {
+        padding-left: 0;
+      }
+
+      ion-item {
+        --inner-padding-end: 0;
+      }
+    }
+  }
 }
